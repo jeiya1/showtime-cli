@@ -1,9 +1,6 @@
-public class Flow {
+import Utils.Colors;
 
-    // ANSI colors for seats
-    static final String GREEN = "\u001B[32m"; // free seat
-    static final String RED = "\u001B[31m";   // taken seat
-    static final String RESET = "\u001B[0m";  // reset color
+public class Flow {
 
     public static void main(String[] args) {
         cinemaName();
@@ -77,14 +74,14 @@ public class Flow {
             "======================================\n" +
             "\nSelect cinema (1-4): 2\n" +
             "Selected: Cinema 2 – AVENGERS: ENDGAME\n" +
-            "\nLegend: " + GREEN + "[ ] Available  " + RED + "[X] Reserved" + RESET + "\n" +
+            "\nLegend: " + Colors.GREEN + "[ ] Available  " + Colors.RED + "[X] Reserved" + Colors.RESET + "\n" +
             "\n            SCREEN THIS WAY\n" +
             "\n      1   2   3   4   5   6   7   8\n" +
-            " A | " + GREEN + "[ ] [ ] [ ] [ ]" + RED + " [X] [X]" + GREEN + " [ ] [ ]" + RESET + "\n" +
-            " B | " + GREEN + "[ ] [ ]" + RED + " [X] [X]" + GREEN + " [ ] [ ] [ ] [ ]" + RESET + "\n" +
-            " C | " + RED + "[X]" + GREEN + " [ ] [ ] [ ] [ ] [ ]" + RED + " [X]" + GREEN + " [ ]" + RESET + "\n" +
-            " D | " + GREEN + "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]" + RESET + "\n" +
-            " E | " + GREEN + "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]" + RESET + "\n" +
+            " A | " + Colors.GREEN + "[ ] [ ] [ ] [ ]" + Colors.RED + " [X] [X]" + Colors.GREEN + " [ ] [ ]" + Colors.RESET + "\n" +
+            " B | " + Colors.GREEN + "[ ] [ ]" + Colors.RED + " [X] [X]" + Colors.GREEN + " [ ] [ ] [ ] [ ]" + Colors.RESET + "\n" +
+            " C | " + Colors.RED + "[X]" + Colors.GREEN + " [ ] [ ] [ ] [ ] [ ]" + Colors.RED + " [X]" + Colors.GREEN + " [ ]" + Colors.RESET + "\n" +
+            " D | " + Colors.GREEN + "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]" + Colors.RESET + "\n" +
+            " E | " + Colors.GREEN + "[ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]" + Colors.RESET + "\n" +
             "\nDisplayed successfully.\n"
         );
     }
