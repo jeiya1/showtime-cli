@@ -3,12 +3,12 @@ package DataStructures;
 public class QueueM {
     LinkedListM queue= new LinkedListM();
     
-    void enqueue(int data){
+    public void enqueue(int data){
         queue.insert(data);
         System.out.println(data + " is enqueued ");
     }
     
-    void dequeue(){
+    public void dequeue(){
         if(queue.head == null){
             System.out.println("Queue is empty");
         } else {
@@ -17,7 +17,7 @@ public class QueueM {
         }
     }
     
-    void peek(){
+    public void peek(){
         if(queue.head == null){
             System.out.println("Queue is empty");
         } else {
@@ -25,7 +25,7 @@ public class QueueM {
         }
     }
     
-    void display(){
+    public void display(){
         if (queue.head == null){
             System.out.println("Queue is empty");
         }else{
