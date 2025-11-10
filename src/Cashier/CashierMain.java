@@ -45,41 +45,79 @@ public class CashierMain {
     private static void takeReservation() {
         CinemaNode cinema = getCinemaByID();
         if (cinema == null) {
+            System.out.println("ERROR: Cinema not found.");
             return;
         }
 
-        printSeatGrid(cinema);
-        int rows = cinema.getRows();
-        int seatsPerRow = cinema.getSeatsPerRow();
+        try {
+            printSeatGrid(cinema);
 
-        LinkedListM<SeatNode> seats = new LinkedListM<>();
-        for (int r = 1; r <= rows; r++) {
-            for (int s = 1; s <= seatsPerRow; s++) {
-                seats.insert(new SeatNode(r, s, false));
+            int rows = cinema.getRows();
+            int seatsPerRow = cinema.getSeatsPerRow();
+
+            while (true) {
+                int row;
+                int seatNum;
+
+                while (true) {
+                    try {
+                        System.out.print("\nEnter Row Number (0 to cancel): ");
+                        row = Integer.parseInt(input.nextLine().trim());
+                        if (row == 0) {
+                            System.out.println("Booking cancelled.");
+                            return;
+                        }
+                        if (row < 1 || row > rows) {
+                            System.out.println("ERROR: Please enter a valid row number (1–" + rows + ").");
+                            continue;
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("ERROR: Invalid input. Please enter a number.");
+                    }
+                }
+
+                while (true) {
+                    try {
+                        System.out.print("Enter Seat Number (0 to cancel): ");
+                        seatNum = Integer.parseInt(input.nextLine().trim());
+                        if (seatNum == 0) {
+                            System.out.println("Booking cancelled.");
+                            return;
+                        }
+                        if (seatNum < 1 || seatNum > seatsPerRow) {
+                            System.out.println("ERROR: Please enter a valid seat number (1–" + seatsPerRow + ").");
+                            continue;
+                        }
+                        break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("ERROR: Invalid input. Please enter a number.");
+                    }
+                }
+
+                if (isSeatBooked(cinema.getID(), row, seatNum)) {
+                    System.out.println("ERROR: Seat already booked. Please choose another seat.");
+                    continue;
+                }
+
+                SeatNode reservedSeat = new SeatNode(row, seatNum, true);
+                reservedSeat.book();
+
+                String receiptId = UUID.randomUUID().toString().substring(0, 8);
+                double price = cinema.getPrice();
+
+                Receipt r = new Receipt(receiptId, cinema.getID(), cinema.getMovie(), row, seatNum, price);
+                receipts.insert(r);
+
+                System.out.printf("%nReservation successful!%nReceipt ID: %s%n", receiptId);
+                break;
             }
+
+        } catch (Exception e) {
+            System.out.println("ERROR: Something unexpected occurred: " + e.getMessage());
         }
-
-        System.out.print("\nEnter Row Number: ");
-        int row = Integer.parseInt(input.nextLine().trim());
-        System.out.print("Enter Seat Number: ");
-        int seatNum = Integer.parseInt(input.nextLine().trim());
-
-        if (row <= 0 || row > rows || seatNum <= 0 || seatNum > seatsPerRow) {
-            System.out.println("ERROR: Invalid seat selection.");
-            return;
-        }
-
-        SeatNode reservedSeat = new SeatNode(row, seatNum, true);
-        reservedSeat.book();
-
-
-        String receiptId = UUID.randomUUID().toString().substring(0, 8);
-        double price = cinema.getPrice();
-        Receipt r = new Receipt(receiptId, cinema.getID(), cinema.getMovie(), row, seatNum, price);
-        receipts.insert(r);
-
-        System.out.printf("Reservation successful!%nReceipt ID: %s%n", receiptId);
     }
+
 
     private static void displayAllSeats() {
         if (cinemas.count() == 0) {
