@@ -17,6 +17,7 @@ public class Flow {
         updateCinema();
         deleteCinema();
         exitProgram();
+        // This is the flow by mian
     }
 
     public static void userInput() {
