@@ -14,6 +14,10 @@ public class CashierMain extends UserBase {
 
     private static final LinkedListM<CinemaNode> cinemas = AdminMain.getCinemas();
 
+    public CashierMain() {
+        setUserRole("Cashier");
+    }
+
     @Override
     public void displayMenu() {
         FrontEnd.Flow.cashierDashboard();
@@ -22,6 +26,7 @@ public class CashierMain extends UserBase {
 
     @Override
     public void run() {
+        displayWelcome();
         while (true) {
             try {
                 displayMenu();
@@ -36,6 +41,7 @@ public class CashierMain extends UserBase {
                     case 5 -> viewSalesSummary();
                     case 6 -> takeReservation();
                     case 0 -> {
+                        displayGoodbye();
                         System.out.println("Returning to main menu...");
                         return;
                     }

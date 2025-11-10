@@ -10,6 +10,10 @@ public class AdminMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
     private static final Scanner input = new Scanner(System.in);
 
+    public AdminMain() {
+        setUserRole("Admin");
+    }
+
     @Override
     public void displayMenu() {
         FrontEnd.Flow.adminDashboard();
@@ -18,6 +22,7 @@ public class AdminMain extends UserBase {
 
     @Override
     public void run() {
+        displayWelcome();
         while (true) {
             try {
                 displayMenu();
@@ -30,7 +35,8 @@ public class AdminMain extends UserBase {
                     case 3 -> updateCinema();
                     case 4 -> deleteCinema();
                     case 0 -> {
-                        System.out.println("Exiting...");
+                        displayGoodbye();
+                        System.out.println("Returning to main menu...");
                         return;
                     }
                     default -> System.out.println("ERROR: Invalid option!");
