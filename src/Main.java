@@ -1,6 +1,7 @@
 import Admin.AdminMain;
 import Cashier.CashierMain;
 import java.util.Scanner;
+import User.UserBase;
 
 public class Main {
     public static void main(String[] args) {
@@ -8,8 +9,6 @@ public class Main {
         int choice = -1;
 
         FrontEnd.Flow.cinemaName();
-        AdminMain admin = new  AdminMain();
-        CashierMain cashier = new  CashierMain();
 
         do {
             FrontEnd.Flow.mainMenu();
@@ -18,14 +17,20 @@ public class Main {
             try {
                 choice = Integer.parseInt(input.nextLine().trim());
 
+                UserBase user = null;
+
                 switch (choice) {
-                    case 1 -> admin.run();
-                    case 2 -> cashier.run();
+                    case 1 -> user = new AdminMain();
+                    case 2 -> user = new CashierMain();
                     case 0 -> {
                         FrontEnd.Flow.exitProgram();
                         input.close();
                     }
                     default -> System.out.println("ERROR: Invalid choice");
+                }
+
+                if (user != null) {
+                    user.run();
                 }
             } catch (NumberFormatException e) {
                 System.out.println("ERROR: Invalid choice.");
