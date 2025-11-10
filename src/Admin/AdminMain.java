@@ -51,7 +51,7 @@ public class AdminMain extends UserBase {
     }
 
 
-    private static void addCinema() {
+    private void addCinema() {
         FrontEnd.Flow.addCinema();
         int id, rows, seatsPerRow;
         double price;
@@ -127,7 +127,7 @@ public class AdminMain extends UserBase {
         input.nextLine();
     }
 
-    private static void viewCinemas() {
+    private void viewCinemas() {
         System.out.println();
 
         if (cinemas.count() == 0) {
@@ -148,7 +148,7 @@ public class AdminMain extends UserBase {
         input.nextLine();
     }
 
-    private static void updateCinema() {
+    private void updateCinema() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
@@ -231,7 +231,7 @@ public class AdminMain extends UserBase {
         input.nextLine();
     }
 
-    static void deleteCinema() {
+    private static void deleteCinema() {
         if  (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();

@@ -55,7 +55,7 @@ public class CashierMain extends UserBase {
         }
     }
 
-    private static void takeReservation() {
+    private void takeReservation() {
         CinemaNode cinema = getCinemaByID();
         if (cinema == null) {
             System.out.println("ERROR: Cinema not found.");
@@ -132,7 +132,7 @@ public class CashierMain extends UserBase {
     }
 
 
-    private static void displayAllSeats() {
+    private void displayAllSeats() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
@@ -147,14 +147,14 @@ public class CashierMain extends UserBase {
         }
     }
 
-    private static void displayAvailableSeats() {
+    private void displayAvailableSeats() {
         CinemaNode cinema = getCinemaByID();
         if (cinema != null) {
             printSeatGrid(cinema);
         }
     }
 
-    private static void showAllReceipts() {
+    private void showAllReceipts() {
         if (receipts.count() == 0) {
             FrontEnd.Flow.viewReceiptNone();
             input.nextLine();
@@ -167,7 +167,7 @@ public class CashierMain extends UserBase {
         }
     }
 
-    private static void searchReceipt() {
+    private void searchReceipt() {
         if (receipts.count() == 0) {
             FrontEnd.Flow.viewReceiptNone();
             input.nextLine();
@@ -187,7 +187,7 @@ public class CashierMain extends UserBase {
         System.out.println("ERROR: Receipt not found.");
     }
 
-    private static boolean isSeatBooked(int cinemaId, int row, int seatNum) {
+    private boolean isSeatBooked(int cinemaId, int row, int seatNum) {
         for (Receipt r : receipts) {
             if (r.getCinemaID() == cinemaId && r.getRow() == row && r.getSeatNumber() == seatNum) {
                 return true;
@@ -196,7 +196,7 @@ public class CashierMain extends UserBase {
         return false;
     }
 
-    private static void printSeatGrid(CinemaNode cinema) {
+    private void printSeatGrid(CinemaNode cinema) {
         int id = cinema.getID();
         int rows = cinema.getRows();
         int seatsPerRow = cinema.getSeatsPerRow();
@@ -221,7 +221,7 @@ public class CashierMain extends UserBase {
     }
 
 
-    private static void viewSalesSummary() {
+    private void viewSalesSummary() {
         if (receipts.count() == 0) {
             FrontEnd.Flow.viewSalesNone();
             input.nextLine();
@@ -258,7 +258,7 @@ public class CashierMain extends UserBase {
     }
 
     @Nullable
-    private static CinemaNode getCinemaByID() {
+    private CinemaNode getCinemaByID() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
