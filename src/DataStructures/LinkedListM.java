@@ -1,9 +1,21 @@
 package DataStructures;
 
-public class LinkedListM {
-    Node head;
+import java.util.Iterator;
 
-    public void insert(int data) {
+public class LinkedListM <T> implements Iterable<T> {
+    private class Node {
+        T data;
+        Node next;
+
+        Node(T data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    private Node head;
+
+    public void insert(T data) {
         Node node = new Node(data);
         if (head == null) {
           head = node;
@@ -15,24 +27,33 @@ public class LinkedListM {
             current.next = node;
         }
     }
-    public void insertStart(int data) {
+
+    public void insertStart(T data) {
         Node node = new Node(data);
         node.next = head;
         head = node;
     }
-    public void insertAt(int index, int data) {
+
+    public void insertAt(int index, T data) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Cannot insert at Negative index!");
+        }
+
         Node node = new Node(data);
+
         if (index == 0) {
             insertStart(data);
+            return;
         } else {
             Node current = head;
             for (int i = 1; i < index; i++) {
                 current = current.next;
-            } 
+            }
             node.next = current.next;
             current.next = node;
         }
     }
+
     public void deleteAt(int index) {
         Node current = head;
         if (index == 0) {
@@ -44,7 +65,33 @@ public class LinkedListM {
             current.next = current.next.next;
         }
     }
-    public void updateNode(int index, int data) {
+    public void deleteValue(T value) {
+        if (head == null) {
+            System.out.println("List is empty!");
+            return;
+        }
+        if (head.data.equals(value)) {
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        Node prev = null;
+
+        while (current != null) {
+            if (current.data.equals(value)) {
+                assert prev != null;
+                prev.next = current.next;
+                return;
+            }
+            prev = current;
+            current = current.next;
+        }
+
+        System.out.println("Value not found in list!");
+    }
+
+    public void updateNode(int index, T data) {
         Node current = head;
         if (index == 0) {
             head.data = data;
@@ -55,10 +102,11 @@ public class LinkedListM {
             current.data = data;
         }
     }
+
     public void display() {
         Node current = head;
         if (head == null) {
-            System.out.println("List is empty.");
+            System.out.println("List is empty!");
             return;
         }
         while (current != null) {
@@ -66,7 +114,8 @@ public class LinkedListM {
             current = current.next;
         }
     }
-    public int countNode() {
+
+    public int count() {
         Node current = head;
         int count = 0;
         while (current != null) {
@@ -75,13 +124,24 @@ public class LinkedListM {
         }
         return count;
     }
-}
-class Node {
-    int data;
-    Node next;
 
-    Node (int data) {
-        this.data = data;
-        this.next = null;
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            private Node current = head;
+
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public T next() {
+                T data = current.data;
+                current = current.next;
+                return data;
+            }
+        };
     }
+
 }

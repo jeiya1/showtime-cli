@@ -1,25 +1,29 @@
 package DataStructures;
 
 public class StackM{
-    LinkedListM stack = new LinkedListM();
+    LinkedListM<Integer> stack = new LinkedListM<>();
 
     public void push(int data) {
         stack.insertStart(data);
     }
     
     public int pop() {
-        if (stack.head == null){
+        if (stack.count() == 0){
             System.out.println("Stack is empty");
             return -1;
         } else {
-            int data = stack.head.data;
+            int data = -1;
+            for (Integer value : stack) {
+                data = value;
+                break;
+            }
             stack.deleteAt(0);
             return data;
         }
      }
     
     public void display() {
-        if (stack.head == null) {
+        if (stack.count() == 0) {
             System.out.println("Stack is empty!");
         } else {
             stack.display();
@@ -27,15 +31,18 @@ public class StackM{
     }
     
     public int peek() {
-        if (stack.head == null) {
+        if (stack.count() == 0) {
             System.out.println("Stack is empty!");
             return -1;
         } else {
-            return stack.head.data;
+            for (Integer value : stack) {
+                return value;
+            }
         }
+        return -1;
     }
     
     public boolean isEmpty() {
-        return stack.head == null;
+        return stack.count() == 0;
     }
 }

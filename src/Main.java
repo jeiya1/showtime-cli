@@ -1,20 +1,36 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-import DataStructures.StackM;
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import Admin.AdminMain;
+import Cashier.CashierMain;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        StackM s = new StackM();
+        Scanner input = new Scanner(System.in);
+        int choice = -1;
 
-        s.push(10);
-        s.push(20);
-        s.push(30);
+        FrontEnd.Flow.cinemaName();
 
-        s.display();
-        s.peek();
+        do {
+            FrontEnd.Flow.mainMenu();
+            FrontEnd.Flow.userInput();
 
-        s.pop();
-        s.display();
+            try {
+                choice = Integer.parseInt(input.nextLine().trim());
 
-        System.out.println("Is empty? " + s.isEmpty());
+                switch (choice) {
+                    case 1 -> AdminMain.run();
+                    case 2 -> CashierMain.run();
+                    case 0 -> {
+                        FrontEnd.Flow.exitProgram();
+                        input.close();
+                    }
+                    default -> System.out.println("ERROR: Invalid choice");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("ERROR: Invalid choice.");
+            } catch (Exception e) {
+                System.out.println("ERROR: Something unexpected occurred: " + e.getMessage());
+            }
+
+        } while (choice != 0);
     }
 }
