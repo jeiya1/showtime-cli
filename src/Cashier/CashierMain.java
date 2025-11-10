@@ -3,21 +3,28 @@ package Cashier;
 import java.util.Scanner;
 import DataStructures.*;
 import Admin.AdminMain;
+import User.UserBase;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class CashierMain {
+public class CashierMain extends UserBase {
     private static final Scanner input = new Scanner(System.in);
     private static final LinkedListM<Receipt> receipts = new LinkedListM<>();
 
     private static final LinkedListM<CinemaNode> cinemas = AdminMain.getCinemas();
 
-    public static void run() {
+    @Override
+    public void displayMenu() {
+        FrontEnd.Flow.cashierDashboard();
+        FrontEnd.Flow.userInput();
+    }
+
+    @Override
+    public void run() {
         while (true) {
             try {
-                FrontEnd.Flow.cashierDashboard();
-                FrontEnd.Flow.userInput();
+                displayMenu();
 
                 int choice = Integer.parseInt(input.nextLine().trim());
 

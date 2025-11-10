@@ -4,16 +4,23 @@ import java.util.Scanner;
 
 import DataStructures.CinemaNode;
 import DataStructures.LinkedListM;
+import User.UserBase;
 
-public class AdminMain {
+public class AdminMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
     private static final Scanner input = new Scanner(System.in);
 
-    public static void run() {
+    @Override
+    public void displayMenu() {
+        FrontEnd.Flow.adminDashboard();
+        FrontEnd.Flow.userInput();
+    }
+
+    @Override
+    public void run() {
         while (true) {
             try {
-                FrontEnd.Flow.adminDashboard();
-                FrontEnd.Flow.userInput();
+                displayMenu();
 
                 int choice = Integer.parseInt(input.nextLine().trim());
 
@@ -169,7 +176,7 @@ public class AdminMain {
                 while (true) {
                     try {
                         System.out.print("Enter new Total Rows: ");
-                        newRows = Integer.parseInt(input.nextLine());
+                        newRows = Integer.parseInt(input.nextLine().trim());
                         if (newRows <= 0) throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
@@ -181,7 +188,7 @@ public class AdminMain {
                 while (true) {
                     try {
                         System.out.print("Enter new Seats per Row: ");
-                        newSeatsPerRow = Integer.parseInt(input.nextLine());
+                        newSeatsPerRow = Integer.parseInt(input.nextLine().trim());
                         if (newSeatsPerRow <= 0) throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
@@ -228,7 +235,7 @@ public class AdminMain {
         FrontEnd.Flow.deleteCinema();
 
         System.out.print("Enter Cinema ID to delete: ");
-        int id = Integer.parseInt(input.nextLine());
+        int id = Integer.parseInt(input.nextLine().trim());
 
         CinemaNode deleteMe = null;
 

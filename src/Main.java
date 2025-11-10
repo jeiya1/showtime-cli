@@ -8,6 +8,8 @@ public class Main {
         int choice = -1;
 
         FrontEnd.Flow.cinemaName();
+        AdminMain admin = new  AdminMain();
+        CashierMain cashier = new  CashierMain();
 
         do {
             FrontEnd.Flow.mainMenu();
@@ -17,8 +19,8 @@ public class Main {
                 choice = Integer.parseInt(input.nextLine().trim());
 
                 switch (choice) {
-                    case 1 -> AdminMain.run();
-                    case 2 -> CashierMain.run();
+                    case 1 -> admin.run();
+                    case 2 -> cashier.run();
                     case 0 -> {
                         FrontEnd.Flow.exitProgram();
                         input.close();
