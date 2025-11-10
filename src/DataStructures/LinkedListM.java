@@ -1,5 +1,7 @@
 package DataStructures;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Iterator;
 
 public class LinkedListM <T> implements Iterable<T> {
@@ -43,7 +45,6 @@ public class LinkedListM <T> implements Iterable<T> {
 
         if (index == 0) {
             insertStart(data);
-            return;
         } else {
             Node current = head;
             for (int i = 1; i < index; i++) {
@@ -126,8 +127,8 @@ public class LinkedListM <T> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return new Iterator<T>() {
+    public @NotNull Iterator<T> iterator() {
+        return new Iterator<>() {
             private Node current = head;
 
             @Override

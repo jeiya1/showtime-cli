@@ -7,7 +7,6 @@ public class CinemaNode {
     private int rows;
     private int seatsPerRow;
     private double price;
-    private CinemaNode next;
 
     public CinemaNode(int id, String name, String movie, int rows, int seatsPerRow,  double price) {
         this.id = id;
