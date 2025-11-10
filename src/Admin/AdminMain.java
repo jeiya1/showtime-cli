@@ -214,6 +214,7 @@ public class AdminMain {
         }
 
         System.out.println("ERROR: Cinema not found.");
+        FrontEnd.Flow.pressEnter();
         input.nextLine();
     }
 
