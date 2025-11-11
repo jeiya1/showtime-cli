@@ -1,5 +1,7 @@
 package User;
 
+import Utils.Colors;
+
 public abstract class UserBase {
     protected String userRole;
 
@@ -7,10 +9,10 @@ public abstract class UserBase {
     public abstract void run();
 
     public void displayWelcome() {
-        System.out.println("Welcome, " + userRole);
+        System.out.println(Colors.WHITE_BOLD + "\n\t   Welcome, " + userRole + Colors.RESET);
     }
     public void displayGoodbye() {
-        System.out.println("Thank you for using the system, " + userRole + "!");
+        System.out.println(Colors.WHITE_BOLD + "\nThank you for using the system, " + userRole + "!" + Colors.RESET);
     }
 
     public String getUserRole() {
