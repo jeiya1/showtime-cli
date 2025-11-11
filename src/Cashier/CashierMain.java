@@ -57,7 +57,6 @@ public class CashierMain extends UserBase {
     private void takeReservation() {
         CinemaNode cinema = getCinemaByID();
         if (cinema == null) {
-            System.out.println("ERROR: Cinema not found.");
             return;
         }
 
