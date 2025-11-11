@@ -16,4 +16,9 @@ public class Colors {
     public static final String ITALIC    = "\u001B[3m";
     public static final String UNDERLINE = "\u001B[4m";
     public static final String INVERT    = "\u001B[7m";
+
+    public static final String BG_RED = "\u001B[41m";  
+    public static final String BG_WHITE = "\u001B[107m";
+    public static final String BG_BLACK = "\u001B[40m";
+    public static final String WHITE_BOLD = "\u001B[1;37m";
 }
