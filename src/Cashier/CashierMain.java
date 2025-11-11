@@ -4,7 +4,6 @@ import java.util.Scanner;
 import DataStructures.*;
 import Admin.AdminMain;
 import User.UserBase;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -257,7 +256,6 @@ public class CashierMain extends UserBase {
         System.out.printf("Total Revenue: %.2f%n", totalRevenue);
     }
 
-    @Nullable
     private CinemaNode getCinemaByID() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
