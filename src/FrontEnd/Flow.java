@@ -20,54 +20,59 @@ public class Flow {
     }
 
     public static void userInput() {
-        System.out.print("Enter your choice: ");
+        System.out.print(Colors.WHITE_BOLD + "\nEnter your choice: " + Colors.RESET);
     }
 
     // HEADER CINEMA NAME
-    public static void cinemaName() {
-        System.out.println(
-                """
-                             _                   _   _               \s
-                         ___| |__   _____      _| |_(_)_ __ ___   ___\s
+   public static void cinemaName() {
+    System.out.println(
+            Colors.YELLOW + """
+                             _                   _   _               
+                         ___| |__   _____      _| |_(_)_ __ ___   ___
                         / __| '_ \\ / _ \\ \\ /\\ / / __| | '_ ` _ \\ / _ \\
                         \\__ \\ | | | (_) \\ V  V /| |_| | | | | | |  __/
                         |___/_| |_|\\___/ \\_/\\_/  \\__|_|_| |_| |_|\\___|
-                        
-                        Welcome to ShowTime-CLI!
-                        """
-        );
-    }
+                        """ + Colors.RESET
+    );
+
+    System.out.println(Colors.ITALIC + Colors.WHITE_BOLD + "Welcome to ShowTime-CLI!" + Colors.RESET);
+}
+
 
     // MAIN MENU
     public static void mainMenu() {
-        System.out.println(
-                """
-                        ╔══════════════════════════════════╗
-                        ║      CINEMA BOOKING SYSTEM       ║
-                        ╠══════════════════════════════════╣
-                        ║ [1] Admin                        ║
-                        ║ [2] Cashier                      ║
-                        ║ [0] Exit                         ║
-                        ╚══════════════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "      CINEMA BOOKING SYSTEM       "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + "                                    " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + "         Select User Type:          " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "           [1] Admin                " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "           [2] Cashier              " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "           [0] Exit                 " + Colors.RESET);
+        
+        System.out.println(Colors.BG_BLACK + Colors.BLACK + "-══════════════════════════════════-" + Colors.RESET);
     }
 
     // CASHIER DASHBOARD
     public static void cashierDashboard() {
-        System.out.println(
-                """
-                        ╔═════════════════════════════╗
-                        ║      CASHIER DASHBOARD      ║
-                        ╠═════════════════════════════╣
-                        ║ [1] Display All Seats       ║
-                        ║ [2] Display Available Seats ║
-                        ║ [3] Display All Receipts    ║
-                        ║ [4] Display Receipt by ID   ║
-                        ║ [5] View Sales Summary      ║
-                        ║ [6] Reserve a Seat          ║
-                        ║ [0] Back                    ║
-                        ╚═════════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         CASHIER DASHBOARD        "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + "                                    " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + "         Select an Option:          " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [1] Display All Seats          " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [2] Display Available Seats    " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [3] Display All Receipts       " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [4] Display Receipt by ID      " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [5] View Sales Summary         " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [6] Reserve a Seat             " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "     [0] Back                       " + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + Colors.BLACK + "-══════════════════════════════════-" + Colors.RESET);
     }
 
     // DISPLAY AVAILABLE SEATS SAMPLE
@@ -143,110 +148,106 @@ public class Flow {
 
     // ADMIN DASHBOARD
     public static void adminDashboard() {
-        System.out.println(
-                """
-                        ╔═══════════════════════════╗
-                        ║       ADMIN DASHBOARD     ║
-                        ╠═══════════════════════════╣
-                        ║ [1] Add Cinema            ║
-                        ║ [2] View Cinemas          ║
-                        ║ [3] Update Cinema Info    ║
-                        ║ [4] Delete Cinema         ║
-                        ║ [0] Back                  ║
-                        ╚═══════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "          ADMIN DASHBOARD         "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + "                                    " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + "         Select an Option:          " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "      [1] Add Cinema                " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "      [2] View Cinemas              " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "      [3] Update Cinema Info        " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "      [4] Delete Cinema             " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE + "      [0] Back                      " + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + Colors.BLACK + "-══════════════════════════════════-" + Colors.RESET);
     }
+
 
     // ADD CINEMA SAMPLE
     public static void addCinema() {
-        System.out.println(
-                """
-                        ╔═══════════════════════════╗
-                        ║       ADD CINEMA          ║
-                        ╚═══════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "            ADD CINEMA            "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
     }
+
+
 
     // VIEW CINEMAS SAMPLE
     public static void viewCinemas() {
-        System.out.println(
-                """
-                        ╔══════════════════════════════════╗
-                        ║           VIEW CINEMAS           ║
-                        ╚══════════════════════════════════╝
-                        """
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         VIEW CINEMAS           "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+        System.out.println(Colors.BG_BLACK + Colors.BLACK + "-══════════════════════════════════-" + Colors.RESET);
     }
 
+
     public static void viewCinemasRecords(String records) {
-        System.out.println(
-                "╔══════════════════════════════════════════╗\n" +
-                "║              LIST OF CINEMAS             ║\n" +
-                "╠══════════════════════════════════════════╣\n" +
-                "║ ID │ NAME       │ ROWS │  SEATS  | PRICE ║\n" +
-                "╠════╪════════════╪══════╪═════════╪═══════╣\n" +
-                        records +
-                "╚══════════════════════════════════════════╝"
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════════o═══════════o═══════════o═════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "               LIST OF CINEMAS               "
+                        + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════════o═══════════o═══════════o═════════o" + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + " ID │ NAME       │ ROWS │  SEATS  │   PRICE    " + Colors.RESET);
+        System.out.println(Colors.BG_BLACK + Colors.WHITE_BOLD + "════╪════════════╪══════╪═════════╪════════════" + Colors.RESET);
+
+        String[] rows = records.split("\n");
+        for (String row : rows) {
+            System.out.println(Colors.BG_BLACK + Colors.WHITE + row + Colors.RESET);
+        }
+
+        System.out.println(Colors.BG_BLACK + Colors.BLACK + "-═════════════════════════════════════════════-" + Colors.RESET);
         pressEnter();
     }
 
     public static void viewCinemasNone() {
-        System.out.println(
-                """
-                        ╔══════════════════════════════════════════════════════╗
-                        ║              NO CINEMA RECORDS AVAILABLE             ║
-                        ╚══════════════════════════════════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "    NO CINEMA RECORDS AVAILABLE   "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         pressEnter();
     }
 
     public static void viewReceiptNone() {
-        System.out.println(
-                """
-                        ╔══════════════════════════════════════════════════════╗
-                        ║                  NO RECEIPTS AVAILABLE               ║
-                        ╚══════════════════════════════════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "       NO RECEIPTS AVAILABLE      "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         pressEnter();
     }
 
     public static void viewSalesNone() {
-        System.out.println(
-                """
-                        ╔══════════════════════════════════════════════════════╗
-                        ║                       NO SALES YET                   ║
-                        ╚══════════════════════════════════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "            NO SALES YET          "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         pressEnter();
     }
 
-    // UPDATE CINEMA SAMPLE
     public static void updateCinema() {
-        System.out.println(
-                """
-                        ╔═══════════════════════════╗
-                        ║     UPDATE CINEMA INFO    ║
-                        ╚═══════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "           UPDATE CINEMA INFO          "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
     }
 
-    // DELETE CINEMA SAMPLE
     public static void deleteCinema() {
-        System.out.println(
-                """
-                        ╔═══════════════════════════╗
-                        ║       DELETE CINEMA       ║
-                        ╚═══════════════════════════╝"""
-        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "             DELETE CINEMA             "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
     }
+
 
     public static void pressEnter() {
-        System.out.println("Press [Enter] to return to menu.");
+        System.out.println("\nPress " + Colors.GREEN + Colors.BOLD + "[Enter]" + Colors.RESET + " to return to menu.");
     }
 
     // EXIT
     public static void exitProgram() {
-        System.out.println("Exiting Program...");
+        System.out.println(Colors.ITALIC + "Exiting Program..." + Colors.RESET);
     }
 }
