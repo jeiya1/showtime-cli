@@ -1,5 +1,7 @@
 import User.UserBase;
 import User.UserFactory;
+import Utils.Colors;
+
 import java.util.Scanner;
 
 public class Main {
@@ -27,13 +29,13 @@ public class Main {
                 if (user != null) {
                     user.run();
                 } else {
-                    System.out.println("ERROR: Invalid choice");
+                    System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid choice." + Colors.RESET);
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid choice.");
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid choice." + Colors.RESET);
             } catch (Exception e) {
-                System.out.println("ERROR: Something unexpected occurred: " + e.getMessage());
+                System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Something unexpected occurred: " + e.getMessage() + Colors.RESET);
             }
 
         } while (choice != 0);
