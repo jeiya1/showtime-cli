@@ -5,6 +5,7 @@ import java.util.Scanner;
 import DataStructures.CinemaNode;
 import DataStructures.LinkedListM;
 import User.UserBase;
+import Utils.Colors;
 
 public class AdminMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
@@ -36,16 +37,16 @@ public class AdminMain extends UserBase {
                     case 4 -> deleteCinema();
                     case 0 -> {
                         displayGoodbye();
-                        System.out.println("Returning to main menu...");
+                        System.out.println(Colors.ITALIC + "\nReturning to main menu..." + Colors.RESET);
                         return;
                     }
-                    default -> System.out.println("ERROR: Invalid option!");
+                    default -> System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid option!\n" + Colors.RESET);
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Invalid input. Please enter a number.");
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid input. Please enter a number.\n" + Colors.RESET);
             } catch (Exception e) {
-                System.out.println("ERROR: Something unexpected occurred: " + e.getMessage());
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Something unexpected occurred: \n" + e.getMessage() + Colors.RESET);
             }
         }
     }
@@ -60,7 +61,7 @@ public class AdminMain extends UserBase {
 
         while (true) {
             try {
-                System.out.print("Enter Cinema Number: ");
+                System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema Number: " + Colors.RESET);
                 id = Integer.parseInt(input.nextLine().trim());
                 if (id <= 0) throw new NumberFormatException();
 
@@ -74,55 +75,55 @@ public class AdminMain extends UserBase {
                 }
 
                 if (exists) {
-                    System.out.println("ERROR: Cinema already exists.");
+                    System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema already exists.\n" + Colors.RESET);
                     continue;
                 }
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Please enter a valid positive number.");
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
             }
         }
 
-        System.out.print("Enter Movie Title: ");
+        System.out.print(Colors.WHITE_BOLD + "Enter Movie Title: " + Colors.RESET);
         movie = input.nextLine().trim();
 
         while (true) {
             try {
-                System.out.print("Enter Total Rows: ");
+                System.out.print(Colors.WHITE_BOLD + "Enter Total Rows: " + Colors.RESET);
                 rows = Integer.parseInt(input.nextLine().trim());
                 if (rows <= 0) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Please enter a valid positive number.");
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
             }
         }
 
         while (true) {
             try {
-                System.out.print("Enter Seats per Row: ");
+                System.out.print(Colors.WHITE_BOLD + "Enter Seats per Row: " + Colors.RESET);
                 seatsPerRow = Integer.parseInt(input.nextLine().trim());
                 if (seatsPerRow <= 0) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Please enter a valid positive number.");
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
             }
         }
 
         while (true) {
             try {
-                System.out.print("Enter Pricing: ");
+                System.out.print(Colors.WHITE_BOLD + "Enter Pricing: " + Colors.RESET);
                 price = Double.parseDouble(input.nextLine().trim());
                 if (price <= 0.00) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println("ERROR: Please enter a valid positive number.");
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
             }
         }
 
         CinemaNode cinema = new CinemaNode(id, "Cinema " + id, movie, rows, seatsPerRow, price);
         cinemas.insert(cinema);
 
-        System.out.println("Movie \"" + movie + "\" added to Cinema " + id + " successfully!");
+        System.out.println(Colors.GREEN + Colors.BOLD + "\nMovie \"" + movie + "\" added to Cinema " + id + " successfully!" + Colors.RESET);
         FrontEnd.Flow.pressEnter();
         input.nextLine();
     }
@@ -139,7 +140,7 @@ public class AdminMain extends UserBase {
         StringBuilder records = new StringBuilder();
 
         for (CinemaNode c : cinemas) {
-            records.append(String.format("║ %d  │ %-10s │  %d  │  %d     | %.2f ║  %n",
+            records.append(String.format(" %d  │ %-10s │ %4d │ %7d │ %10.2f %n",
                     c.getID(), c.getName(),
                     c.getRows(), c.getSeatsPerRow(), c.getPrice()));
         }
@@ -157,48 +158,48 @@ public class AdminMain extends UserBase {
 
         FrontEnd.Flow.updateCinema();
 
-        System.out.print("Enter Cinema ID to update: ");
+        System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID to update: " + Colors.RESET);
         int id = Integer.parseInt(input.nextLine().trim());
 
         for (CinemaNode c : cinemas) {
             if (c.getID() == id) {
-                System.out.println("\nCurrent Cinema Info:");
-                System.out.printf("ID: %d%n", c.getID());
-                System.out.printf("Cinema Name: %s%n", c.getName());
-                System.out.printf("Movie Title: %s%n", c.getMovie());
-                System.out.printf("Rows: %d%n", c.getRows());
-                System.out.printf("Seats per Row: %d%n", c.getSeatsPerRow());
-                System.out.printf("Pricing: %.2f %n", c.getPrice());
+                System.out.println(Colors.WHITE_BOLD + "\nCurrent Cinema Info:" + Colors.RESET);
+                System.out.printf(Colors.WHITE + "ID: %d%n", c.getID() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "Cinema Name: %s%n", c.getName() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "Movie Title: %s%n", c.getMovie() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "Rows: %d%n", c.getRows() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "Seats per Row: %d%n", c.getSeatsPerRow() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "Pricing: %.2f %n", c.getPrice() + Colors.RESET);
 
-                System.out.print("\nEnter new Cinema Name: ");
+                System.out.print(Colors.WHITE_BOLD + "\nEnter new Cinema Name: " + Colors.RESET);
                 String newName = input.nextLine();
                 if (!newName.isEmpty()) c.setName(newName);
 
-                System.out.print("Enter new Movie Title: ");
+                System.out.print(Colors.WHITE_BOLD + "Enter new Movie Title: " + Colors.RESET);
                 String newMovie = input.nextLine();
                 if (!newMovie.isEmpty()) c.setMovie(newMovie);
 
                 int newRows;
                 while (true) {
                     try {
-                        System.out.print("Enter new Total Rows: ");
+                        System.out.print(Colors.WHITE_BOLD + "Enter new Total Rows: " + Colors.RESET);
                         newRows = Integer.parseInt(input.nextLine().trim());
                         if (newRows <= 0) throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
-                        System.out.println("ERROR: Please enter a valid positive number.");
+                        System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                     }
                 }
 
                 int newSeatsPerRow;
                 while (true) {
                     try {
-                        System.out.print("Enter new Seats per Row: ");
+                        System.out.print(Colors.WHITE_BOLD + "Enter new Seats per Row: " + Colors.RESET);
                         newSeatsPerRow = Integer.parseInt(input.nextLine().trim());
                         if (newSeatsPerRow <= 0) throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
-                        System.out.println("ERROR: Please enter a valid positive number.");
+                        System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                     }
                 }
 
@@ -208,25 +209,25 @@ public class AdminMain extends UserBase {
                 double pricing;
                 while (true) {
                     try {
-                        System.out.print("Enter new Pricing: ");
+                        System.out.print(Colors.WHITE_BOLD + "Enter new Pricing: " + Colors.RESET);
                         pricing = Double.parseDouble(input.nextLine().trim());
                         if (pricing <= 0) throw new NumberFormatException();
                         break;
                     } catch (NumberFormatException e) {
-                        System.out.println("ERROR: Please enter a valid positive number.");
+                        System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                     }
                 }
 
                 c.setPrice(pricing);
 
-                System.out.printf("Cinema \"%s - %s\" updated successfully!", c.getName(), c.getMovie());
+                System.out.printf(Colors.GREEN + "\nCinema \"%s - %s\" updated successfully!", c.getName(), c.getMovie() + Colors.RESET);
                 FrontEnd.Flow.pressEnter();
                 input.nextLine();
                 return;
             }
         }
 
-        System.out.println("ERROR: Cinema not found.");
+        System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found.\n" + Colors.RESET);
         FrontEnd.Flow.pressEnter();
         input.nextLine();
     }
@@ -240,7 +241,7 @@ public class AdminMain extends UserBase {
 
         FrontEnd.Flow.deleteCinema();
 
-        System.out.print("Enter Cinema ID to delete: ");
+        System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID to delete: " + Colors.RESET);
         int id = Integer.parseInt(input.nextLine().trim());
 
         CinemaNode deleteMe = null;
@@ -253,11 +254,11 @@ public class AdminMain extends UserBase {
 
         if (deleteMe != null) {
             cinemas.deleteValue(deleteMe);
-            System.out.printf("Cinema %d deleted successfully!%n", id);
-            System.out.println("Press [Enter] to return to menu.");
+            System.out.printf(Colors.GREEN + "\nCinema %d deleted successfully!%n\n", id + Colors.RESET);
+            System.out.println("Press " + Colors.GREEN + Colors.BOLD + "[Enter]" + Colors.RESET + "to return to menu.");
             input.nextLine();
         } else {
-            System.out.println("ERROR: Cinema not found.");
+            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found.\n" + Colors.RESET);
         }
 
     }
