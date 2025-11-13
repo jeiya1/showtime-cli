@@ -143,7 +143,8 @@ public class CashierMain extends UserBase {
         int rows = cinema.getRows();
         int seatsPerRow = cinema.getSeatsPerRow();
 
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         CINEMA SEAT LAYOUT       "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -232,55 +233,55 @@ public class CashierMain extends UserBase {
 
 
     private void viewSalesSummary() {
-    if (receipts.count() == 0) {
-        FrontEnd.Flow.viewSalesNone();
-        input.nextLine();
-        return;
-    }
+        if (receipts.count() == 0) {
+            FrontEnd.Flow.viewSalesNone();
+            input.nextLine();
+            return;
+        }
 
-    final int WIDTH = 40;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    String now = LocalDateTime.now().format(dtf);
+        final int WIDTH = 40;
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String now = LocalDateTime.now().format(dtf);
 
-    int totalTickets = 0;
-    double totalRevenue = 0.0;
+        int totalTickets = 0;
+        double totalRevenue = 0.0;
 
-    System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
-    System.out.println(Colors.WHITE + center("SALES SUMMARY", WIDTH) + Colors.RESET);
-    System.out.println(Colors.WHITE + center(now, WIDTH) + Colors.RESET);
-    System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + center("SALES SUMMARY", WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + center(now, WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
 
-    System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Cinema (Movie)", "Revenue");
+        System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Cinema (Movie)", "Revenue");
 
-    for (CinemaNode cinema : cinemas) {
-        int sold = 0;
-        double rev = 0.0;
-        for (Receipt r : receipts) {
-            if (r.getCinemaID() == cinema.getID()) {
-                sold++;
-                rev += r.getPrice();
+        for (CinemaNode cinema : cinemas) {
+            int sold = 0;
+            double rev = 0.0;
+            for (Receipt r : receipts) {
+                if (r.getCinemaID() == cinema.getID()) {
+                    sold++;
+                    rev += r.getPrice();
+                }
             }
+            if (sold > 0) {
+                String left = String.format("%d (%s)", cinema.getID(), trimTo(cinema.getMovie(), 18));
+                System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, left, formatCurrency(rev));
+            }
+            totalTickets += sold;
+            totalRevenue += rev;
         }
-        if (sold > 0) {
-            String left = String.format("%d (%s)", cinema.getID(), trimTo(cinema.getMovie(), 18));
-            System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, left, formatCurrency(rev));
-        }
-        totalTickets += sold;
-        totalRevenue += rev;
+
+        System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
+        System.out.printf(Colors.WHITE + "%-25s %10d%n" + Colors.RESET, "Total Tickets:", totalTickets);
+        System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Total Revenue:", formatCurrency(totalRevenue));
+        System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + center("End of Report", WIDTH) + Colors.RESET);
+        System.out.println();
     }
 
-    System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
-    System.out.printf(Colors.WHITE + "%-25s %10d%n" + Colors.RESET, "Total Tickets:", totalTickets);
-    System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Total Revenue:", formatCurrency(totalRevenue));
-    System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
-    System.out.println(Colors.WHITE + center("End of Report", WIDTH) + Colors.RESET);
-    System.out.println();
-}
-
-private String trimTo(String s, int max) {
-    if (s == null) return "";
-    return s.length() <= max ? s : s.substring(0, max - 3) + "...";
-}
+    private String trimTo(String s, int max) {
+        if (s == null) return "";
+        return s.length() <= max ? s : s.substring(0, max - 3) + "...";
+    }
 
     private void displayAllSeats() {
         if (cinemas.count() == 0) {
@@ -297,7 +298,11 @@ private String trimTo(String s, int max) {
 
     private void displayAvailableSeats() {
         CinemaNode cinema = getCinemaByID();
-        if (cinema != null) printSeatGrid(cinema);
+        if (cinema != null) {
+            printSeatGrid(cinema);
+        } else {
+            System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
+        }
     }
 
     private void showAllReceipts() {

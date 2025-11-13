@@ -164,12 +164,13 @@ public class AdminMain extends UserBase {
         for (CinemaNode c : cinemas) {
             if (c.getID() == id) {
                 System.out.println(Colors.WHITE_BOLD + "\nCurrent Cinema Info:" + Colors.RESET);
-                System.out.printf(Colors.WHITE + "ID: %d%n", c.getID() + Colors.RESET);
-                System.out.printf(Colors.WHITE + "Cinema Name: %s%n", c.getName() + Colors.RESET);
-                System.out.printf(Colors.WHITE + "Movie Title: %s%n", c.getMovie() + Colors.RESET);
-                System.out.printf(Colors.WHITE + "Rows: %d%n", c.getRows() + Colors.RESET);
-                System.out.printf(Colors.WHITE + "Seats per Row: %d%n", c.getSeatsPerRow() + Colors.RESET);
-                System.out.printf(Colors.WHITE + "Pricing: %.2f %n", c.getPrice() + Colors.RESET);
+                System.out.printf(Colors.WHITE + "ID: %d%n" + Colors.RESET, c.getID());
+                System.out.printf(Colors.WHITE + "Cinema Name: %s%n" + Colors.RESET, c.getName());
+                System.out.printf(Colors.WHITE + "Movie Title: %s%n" + Colors.RESET, c.getMovie());
+                System.out.printf(Colors.WHITE + "Rows: %d%n" + Colors.RESET, c.getRows());
+                System.out.printf(Colors.WHITE + "Seats per Row: %d%n" + Colors.RESET, c.getSeatsPerRow());
+                System.out.printf(Colors.WHITE + "Pricing: %.2f%n" + Colors.RESET, c.getPrice());
+
 
                 System.out.print(Colors.WHITE_BOLD + "\nEnter new Cinema Name: " + Colors.RESET);
                 String newName = input.nextLine();
@@ -220,7 +221,7 @@ public class AdminMain extends UserBase {
 
                 c.setPrice(pricing);
 
-                System.out.printf(Colors.GREEN + "\nCinema \"%s - %s\" updated successfully!", c.getName(), c.getMovie() + Colors.RESET);
+                System.out.printf(Colors.GREEN + "\nCinema \"%s - %s\" updated successfully!" + Colors.RESET, c.getName(), c.getMovie());
                 FrontEnd.Flow.pressEnter();
                 input.nextLine();
                 return;
@@ -254,7 +255,7 @@ public class AdminMain extends UserBase {
 
         if (deleteMe != null) {
             cinemas.deleteValue(deleteMe);
-            System.out.printf(Colors.GREEN + "\nCinema %d deleted successfully!%n\n", id + Colors.RESET);
+            System.out.printf(Colors.GREEN + "\nCinema %d deleted successfully!%n\n" + Colors.RESET, id);
             System.out.println("Press " + Colors.GREEN + Colors.BOLD + "[Enter]" + Colors.RESET + "to return to menu.");
             input.nextLine();
         } else {

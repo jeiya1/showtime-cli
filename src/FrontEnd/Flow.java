@@ -41,7 +41,8 @@ public class Flow {
 
     // MAIN MENU
     public static void mainMenu() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "      CINEMA BOOKING SYSTEM       "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -57,7 +58,8 @@ public class Flow {
 
     // CASHIER DASHBOARD
     public static void cashierDashboard() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         CASHIER DASHBOARD        "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -148,7 +150,8 @@ public class Flow {
 
     // ADMIN DASHBOARD
     public static void adminDashboard() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "          ADMIN DASHBOARD         "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -167,7 +170,8 @@ public class Flow {
 
     // ADD CINEMA SAMPLE
     public static void addCinema() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "            ADD CINEMA            "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -177,7 +181,8 @@ public class Flow {
 
     // VIEW CINEMAS SAMPLE
     public static void viewCinemas() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         VIEW CINEMAS           "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -187,6 +192,7 @@ public class Flow {
 
 
     public static void viewCinemasRecords(String records) {
+        System.out.println();
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════════o═══════════o═══════════o═════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "               LIST OF CINEMAS               "
                         + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
@@ -204,7 +210,8 @@ public class Flow {
     }
 
     public static void viewCinemasNone() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "    NO CINEMA RECORDS AVAILABLE   "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -212,7 +219,8 @@ public class Flow {
     }
 
     public static void viewReceiptNone() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "       NO RECEIPTS AVAILABLE      "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -220,7 +228,8 @@ public class Flow {
     }
 
     public static void viewSalesNone() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "            NO SALES YET          "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
@@ -228,15 +237,17 @@ public class Flow {
     }
 
     public static void updateCinema() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
-        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "           UPDATE CINEMA INFO          "
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "        UPDATE CINEMA INFO        "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
     }
 
     public static void deleteCinema() {
-        System.out.println(Colors.BG_RED + Colors.BLACK + "\no═══════o════════o════════o════════o" + Colors.RESET);
-        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "             DELETE CINEMA             "
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "          DELETE CINEMA           "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
     }
