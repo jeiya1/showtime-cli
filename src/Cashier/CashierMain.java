@@ -299,12 +299,15 @@ public class CashierMain extends UserBase {
     }
 
     private void displayAvailableSeats() {
-        CinemaNode cinema = getCinemaByID();
-        if (cinema == CANCELLED) return;
-        if (cinema != null) {
-            printSeatGrid(cinema);
-        } else {
-            System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
+        while (true) {
+            CinemaNode cinema = getCinemaByID();
+            if (cinema == CANCELLED) return;
+            if (cinema != null) {
+                printSeatGrid(cinema);
+                return;
+            } else {
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
+            }
         }
     }
 

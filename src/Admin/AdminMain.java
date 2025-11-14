@@ -291,6 +291,7 @@ public class AdminMain extends UserBase {
                 System.out.printf(Colors.GREEN + "\nCinema %d deleted successfully!%n\n" + Colors.RESET, id);
                 System.out.println("Press " + Colors.GREEN + Colors.BOLD + "[Enter]" + Colors.RESET + "to return to menu.");
                 input.nextLine();
+                return;
             } else {
                 System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found.\n" + Colors.RESET);
             }
