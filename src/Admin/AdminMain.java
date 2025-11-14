@@ -178,8 +178,11 @@ public class AdminMain extends UserBase {
                 continue;
             }
 
+            boolean found = false;
+
             for (CinemaNode c : cinemas) {
                 if (c.getID() == id) {
+                    found = true;
                     System.out.println(Colors.WHITE_BOLD + "\nCurrent Cinema Info:" + Colors.RESET);
                     System.out.printf(Colors.WHITE + "ID: %d%n" + Colors.RESET, c.getID());
                     System.out.printf(Colors.WHITE + "Cinema Name: %s%n" + Colors.RESET, c.getName());
@@ -243,6 +246,9 @@ public class AdminMain extends UserBase {
                     input.nextLine();
                     return;
                 }
+            }
+            if (!found) {
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found." + Colors.RESET);
             }
         }
     }
