@@ -14,6 +14,7 @@ public class CashierMain extends UserBase {
     private static final Scanner input = new Scanner(System.in);
     private static final LinkedListM<Receipt> receipts = new LinkedListM<>();
     private static final LinkedListM<CinemaNode> cinemas = AdminMain.getCinemas();
+    private static final CinemaNode CANCELLED = new CinemaNode(-1, null, null, 0, 0, 0);
 
     public CashierMain() {
         setUserRole("Cashier");
@@ -57,6 +58,7 @@ public class CashierMain extends UserBase {
 
     private void takeReservation() {
         CinemaNode cinema = getCinemaByID();
+        if (cinema == CANCELLED) return;
         if (cinema == null) {
             System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
             return;
@@ -151,7 +153,7 @@ public class CashierMain extends UserBase {
 
         System.out.print(Colors.WHITE_BOLD + "         ");
         for (int s = 1; s <= seatsPerRow; s++) {
-            System.out.print(String.format("%2d  ", s));
+            System.out.printf("%2d  ", s);
         }
         System.out.println(Colors.RESET);
 
@@ -298,6 +300,7 @@ public class CashierMain extends UserBase {
 
     private void displayAvailableSeats() {
         CinemaNode cinema = getCinemaByID();
+        if (cinema == CANCELLED) return;
         if (cinema != null) {
             printSeatGrid(cinema);
         } else {
@@ -324,16 +327,24 @@ public class CashierMain extends UserBase {
             input.nextLine();
             return;
         }
-        System.out.print(Colors.WHITE_BOLD + "\nEnter Receipt ID to search: " + Colors.RESET);
-        String searchId = input.nextLine().trim();
-        for (Receipt r : receipts) {
-            if (r.getReceiptID().equalsIgnoreCase(searchId)) {
-                CinemaNode cinema = getCinemaByID(r.getCinemaID());
-                if (cinema != null) printReceipt(r, cinema);
-                return;
+        String searchId;
+        while (true) {
+            System.out.print(Colors.WHITE_BOLD + "\nEnter Receipt ID to search (0 to cancel): " + Colors.RESET);
+            searchId = input.nextLine().trim();
+            if (searchId.equals("0")) return;
+            if (searchId.length() < 8) {
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid ID.\n" + Colors.RESET);
+                continue;
             }
+            for (Receipt r : receipts) {
+                if (r.getReceiptID().equalsIgnoreCase(searchId)) {
+                    CinemaNode cinema = getCinemaByID(r.getCinemaID());
+                    if (cinema != null) printReceipt(r, cinema);
+                    return;
+                }
+            }
+            System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Receipt not found." + Colors.RESET);
         }
-        System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Receipt not found." + Colors.RESET);
     }
 
     private CinemaNode getCinemaByID() {
@@ -342,9 +353,24 @@ public class CashierMain extends UserBase {
             input.nextLine();
             return null;
         }
-        System.out.print(Colors.WHITE_BOLD + "Enter Cinema ID: " + Colors.RESET);
-        int id = Integer.parseInt(input.nextLine().trim());
-        return getCinemaByID(id);
+        int id = 0;
+        while (true) {
+            try {
+                System.out.print(Colors.WHITE_BOLD + "Enter Cinema ID (0 to cancel): " + Colors.RESET);
+                id = Integer.parseInt(input.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                continue;
+            }
+
+            if (id == 0) {
+                return CANCELLED;
+            } else if (id < 1) {
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                continue;
+            }
+            return getCinemaByID(id);
+        }
     }
 
     private CinemaNode getCinemaByID(int id) {
