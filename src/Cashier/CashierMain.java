@@ -15,6 +15,8 @@ public class CashierMain extends UserBase {
     private static final LinkedListM<Receipt> receipts = new LinkedListM<>();
     private static final LinkedListM<CinemaNode> cinemas = AdminMain.getCinemas();
     private static final CinemaNode CANCELLED = new CinemaNode(-1, null, null, 0, 0, 0);
+    private static final StackM<Receipt> undoStack = new StackM<>();
+    private static final StackM<Receipt> redoStack = new StackM<>();
 
     public CashierMain() {
         setUserRole("Cashier");
@@ -232,6 +234,37 @@ public class CashierMain extends UserBase {
         System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
         System.out.println();
     }
+
+//    private static void undoLastReservation() {
+//        if (undoStack.isEmpty()) {
+//            System.out.println("Nothing to undo.");
+//            return;
+//        }
+//
+//        Receipt last = undoStack.pop();
+//        receipts.deleteValue(last);
+//        redoStack.push(last);
+//
+//        System.out.printf("Undo successful: Reservation for Cinema %d Row %d Seat %d canceled.%n",
+//                last.getCinemaID(), last.getRow(), last.getSeatNumber());
+//
+//        fillFromWaitingList(last.getCinemaID(), last.getRow(), last.getSeatNumber());
+//    }
+
+    private static void redoLastReservation() {
+        if (redoStack.isEmpty()) {
+            System.out.println("Nothing to redo.");
+            return;
+        }
+
+        Receipt last = redoStack.pop();
+        receipts.insert(last);
+        undoStack.push(last);
+
+        System.out.printf("Redo successful: Reservation for Cinema %d Row %d Seat %d restored.%n",
+                last.getCinemaID(), last.getRow(), last.getSeatNumber());
+    }
+
 
 
     private void viewSalesSummary() {
