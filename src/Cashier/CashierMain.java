@@ -59,47 +59,49 @@ public class CashierMain extends UserBase {
     }
 
     private void takeReservation() {
-        CinemaNode cinema = getCinemaByID();
-        if (cinema == CANCELLED) return;
-        if (cinema == null) {
-            System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
-            return;
-        }
-
-        try {
-            printSeatGrid(cinema);
-            int rows = cinema.getRows();
-            int seatsPerRow = cinema.getSeatsPerRow();
-
-            while (true) {
-                int row = promptRow(rows);
-                if (row == 0) return;
-
-                int seatNum = promptSeat(seatsPerRow);
-                if (seatNum == 0) return;
-
-                if (isSeatBooked(cinema.getID(), row, seatNum)) {
-                    System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Seat already booked. Please choose another seat." + Colors.RESET);
-                    continue;
-                }
-
-                SeatNode reservedSeat = new SeatNode(row, seatNum, true);
-                reservedSeat.book();
-
-                String receiptId = UUID.randomUUID().toString().substring(0, 8);
-                double price = cinema.getPrice();
-
-                Receipt r = new Receipt(receiptId, cinema.getID(), cinema.getMovie(), row, seatNum, price);
-                receipts.insert(r);
-
-                System.out.printf(Colors.GREEN + Colors.BOLD + "\nReservation successful!\nReceipt ID: %s%n" + Colors.RESET, receiptId);
-
-                printReceipt(r, cinema);
-                break;
+        while (true) {
+            CinemaNode cinema = getCinemaByID();
+            if (cinema == CANCELLED) return;
+            if (cinema == null) {
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
+                continue;
             }
 
-        } catch (Exception e) {
-            System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Something unexpected occurred: " + e.getMessage() + Colors.RESET);
+            try {
+                printSeatGrid(cinema);
+                int rows = cinema.getRows();
+                int seatsPerRow = cinema.getSeatsPerRow();
+
+                while (true) {
+                    int row = promptRow(rows);
+                    if (row == 0) return;
+
+                    int seatNum = promptSeat(seatsPerRow);
+                    if (seatNum == 0) return;
+
+                    if (isSeatBooked(cinema.getID(), row, seatNum)) {
+                        System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Seat already booked. Please choose another seat." + Colors.RESET);
+                        continue;
+                    }
+
+                    SeatNode reservedSeat = new SeatNode(row, seatNum, true);
+                    reservedSeat.book();
+
+                    String receiptId = UUID.randomUUID().toString().substring(0, 8);
+                    double price = cinema.getPrice();
+
+                    Receipt r = new Receipt(receiptId, cinema.getID(), cinema.getMovie(), row, seatNum, price);
+                    receipts.insert(r);
+
+                    System.out.printf(Colors.GREEN + Colors.BOLD + "\nReservation successful!\nReceipt ID: %s%n" + Colors.RESET, receiptId);
+
+                    printReceipt(r, cinema);
+                    return;
+                }
+
+            } catch (Exception e) {
+                System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Something unexpected occurred: " + e.getMessage() + Colors.RESET);
+            }
         }
     }
 
