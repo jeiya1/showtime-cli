@@ -390,7 +390,7 @@ public class CashierMain extends UserBase {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
-            return null;
+            return CANCELLED;
         }
         int id = 0;
         while (true) {

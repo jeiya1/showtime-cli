@@ -205,7 +205,10 @@ public class AdminMain extends UserBase {
                         try {
                             System.out.print(Colors.WHITE_BOLD + "Enter new Total Rows: " + Colors.RESET);
                             String in = input.nextLine().trim();
-                            if (in.isEmpty()) break;
+                            if (in.isEmpty()) {
+                                newRows = c.getRows();
+                                break;
+                            }
                             newRows = Integer.parseInt(in);
                             if (newRows <= 0) throw new NumberFormatException();
                             break;
@@ -213,14 +216,17 @@ public class AdminMain extends UserBase {
                             System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                         }
                     }
-                    newRows = c.getRows();
 
                     int newSeatsPerRow;
                     while (true) {
                         try {
                             System.out.print(Colors.WHITE_BOLD + "Enter new Seats per Row: " + Colors.RESET);
                             String in = input.nextLine().trim();
-                            if (in.isEmpty()) break;
+                            if (in.isEmpty()) {
+                                newSeatsPerRow = c.getSeatsPerRow();
+                                break;
+                            }
+
                             newSeatsPerRow = Integer.parseInt(in);
                             if (newSeatsPerRow <= 0) throw new NumberFormatException();
                             break;
@@ -228,8 +234,6 @@ public class AdminMain extends UserBase {
                             System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                         }
                     }
-
-                    newSeatsPerRow = c.getSeatsPerRow();
 
                     c.setRows(newRows);
                     c.setSeatsPerRow(newSeatsPerRow);
@@ -239,7 +243,10 @@ public class AdminMain extends UserBase {
                         try {
                             System.out.print(Colors.WHITE_BOLD + "Enter new Pricing: " + Colors.RESET);
                             String in = input.nextLine().trim();
-                            if (in.isEmpty()) break;
+                            if (in.isEmpty()) {
+                                pricing = c.getPrice();
+                                break;
+                            }
                             pricing = Double.parseDouble(in);
                             if (pricing <= 0) throw new NumberFormatException();
                             break;
@@ -247,8 +254,6 @@ public class AdminMain extends UserBase {
                             System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
                         }
                     }
-
-                    pricing = c.getPrice();
 
                     c.setPrice(pricing);
 
