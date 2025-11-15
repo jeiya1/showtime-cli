@@ -48,12 +48,54 @@ public class CashierMain extends UserBase {
                         System.out.println(Colors.ITALIC + "\nReturning to main menu..." + Colors.RESET);
                         return;
                     }
-                    default -> System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid option!\n" + Colors.RESET);
+                    default -> System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid option!" + Colors.RESET);
                 }
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid input. Please enter a number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid input. Please enter a number." + Colors.RESET);
             } catch (Exception e) {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Something unexpected occurred:\n" + e.getMessage() + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Something unexpected occurred: " + e.getMessage() + Colors.RESET);
+            }
+        }
+    }
+
+    // ---------------------- DISPLAY AVAILABLE SEATS (Improved UX) 
+    private void displayAvailableSeats() {
+        if (cinemas.count() == 0) {
+            FrontEnd.Flow.viewCinemasNone();
+            input.nextLine();
+            return;
+        }
+
+        // Show Available Cinemas First
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(
+                Colors.BG_RED + Colors.BLACK + "║" +
+                Colors.BOLD + Colors.YELLOW + "         AVAILABLE CINEMAS        " +
+                Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" +
+                Colors.RESET
+        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+        for (CinemaNode c : cinemas) {
+            System.out.println(
+                    Colors.WHITE_BOLD + "\nCinema " + c.getID() + ": " +
+                    Colors.YELLOW + c.getMovie() + Colors.RESET
+            );
+        }
+        System.out.println();
+
+        // Ask the user for Cinema ID
+        while (true) {
+            CinemaNode cinema = getCinemaByID();
+            if (cinema == CANCELLED) return;
+
+            if (cinema != null) {
+                printSeatGrid(cinema);
+                return;
+            } else {
+                System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Cinema not found." + Colors.RESET);
+                return;
             }
         }
     }
@@ -154,6 +196,7 @@ public class CashierMain extends UserBase {
         System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         CINEMA SEAT LAYOUT       "
                 + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
 
         System.out.print(Colors.WHITE_BOLD + "         ");
         for (int s = 1; s <= seatsPerRow; s++) {
@@ -237,38 +280,6 @@ public class CashierMain extends UserBase {
         System.out.println();
     }
 
-//    private static void undoLastReservation() {
-//        if (undoStack.isEmpty()) {
-//            System.out.println("Nothing to undo.");
-//            return;
-//        }
-//
-//        Receipt last = undoStack.pop();
-//        receipts.deleteValue(last);
-//        redoStack.push(last);
-//
-//        System.out.printf("Undo successful: Reservation for Cinema %d Row %d Seat %d canceled.%n",
-//                last.getCinemaID(), last.getRow(), last.getSeatNumber());
-//
-//        fillFromWaitingList(last.getCinemaID(), last.getRow(), last.getSeatNumber());
-//    }
-
-    private static void redoLastReservation() {
-        if (redoStack.isEmpty()) {
-            System.out.println("Nothing to redo.");
-            return;
-        }
-
-        Receipt last = redoStack.pop();
-        receipts.insert(last);
-        undoStack.push(last);
-
-        System.out.printf("Redo successful: Reservation for Cinema %d Row %d Seat %d restored.%n",
-                last.getCinemaID(), last.getRow(), last.getSeatNumber());
-    }
-
-
-
     private void viewSalesSummary() {
         if (receipts.count() == 0) {
             FrontEnd.Flow.viewSalesNone();
@@ -333,20 +344,6 @@ public class CashierMain extends UserBase {
         }
     }
 
-    private void displayAvailableSeats() {
-        while (true) {
-            CinemaNode cinema = getCinemaByID();
-            if (cinema == CANCELLED) return;
-            if (cinema != null) {
-                printSeatGrid(cinema);
-                return;
-            } else {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
-                return;
-            }
-        }
-    }
-
     private void showAllReceipts() {
         if (receipts.count() == 0) {
             FrontEnd.Flow.viewReceiptNone();
@@ -372,7 +369,7 @@ public class CashierMain extends UserBase {
             searchId = input.nextLine().trim();
             if (searchId.equals("0")) return;
             if (searchId.length() < 8) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid ID.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid ID." + Colors.RESET);
                 continue;
             }
             for (Receipt r : receipts) {
@@ -395,17 +392,17 @@ public class CashierMain extends UserBase {
         int id = 0;
         while (true) {
             try {
-                System.out.print(Colors.WHITE_BOLD + "Enter Cinema ID (0 to cancel): " + Colors.RESET);
+                System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID (0 to cancel): " + Colors.RESET);
                 id = Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                 continue;
             }
 
             if (id == 0) {
                 return CANCELLED;
             } else if (id < 1) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                 continue;
             }
             return getCinemaByID(id);
