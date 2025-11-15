@@ -12,7 +12,6 @@ import Utils.Colors;
 public class AdminMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
     private static final Scanner input = new Scanner(System.in);
-    private static final LinkedListM<Receipt> receipts = CashierMain.getReceipts();
 
     public AdminMain() {
         setUserRole("Admin");
@@ -263,7 +262,7 @@ public class AdminMain extends UserBase {
                     }
 
                     boolean invalidBookingExists = false;
-                    for (Receipt r : CashierMain.getReceipts()) {   // <-- Add a getter for receipts
+                    for (Receipt r : CashierMain.getReceipts()) {
                         if (r.getCinemaID() == c.getID()) {
                             if (r.getRow() > newRows || r.getSeatNumber() > newSeatsPerRow) {
                                 invalidBookingExists = true;
