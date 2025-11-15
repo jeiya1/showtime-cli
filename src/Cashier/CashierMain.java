@@ -340,6 +340,7 @@ public class CashierMain extends UserBase {
                 return;
             } else {
                 System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
+                return;
             }
         }
     }
