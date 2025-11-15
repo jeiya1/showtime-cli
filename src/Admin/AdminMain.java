@@ -43,13 +43,13 @@ public class AdminMain extends UserBase {
                         System.out.println(Colors.ITALIC + "\nReturning to main menu..." + Colors.RESET);
                         return;
                     }
-                    default -> System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid option!\n" + Colors.RESET);
+                    default -> System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid option!" + Colors.RESET);
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid input. Please enter a number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Invalid input. Please enter a number." + Colors.RESET);
             } catch (Exception e) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Something unexpected occurred: \n" + e.getMessage() + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Something unexpected occurred: " + e.getMessage() + Colors.RESET);
             }
         }
     }
@@ -81,12 +81,12 @@ public class AdminMain extends UserBase {
                 }
 
                 if (exists) {
-                    System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema already exists.\n" + Colors.RESET);
+                    System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema already exists." + Colors.RESET);
                     continue;
                 }
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
             }
         }
 
@@ -100,7 +100,7 @@ public class AdminMain extends UserBase {
                 if (rows <= 0) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number." + Colors.RESET);
             }
         }
 
@@ -111,7 +111,7 @@ public class AdminMain extends UserBase {
                 if (seatsPerRow <= 0) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid positive number." + Colors.RESET);
             }
         }
 
@@ -122,7 +122,7 @@ public class AdminMain extends UserBase {
                 if (price <= 0.00) throw new NumberFormatException();
                 break;
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
             }
         }
 
@@ -135,8 +135,6 @@ public class AdminMain extends UserBase {
     }
 
     private void viewCinemas() {
-        System.out.println();
-
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
@@ -188,13 +186,22 @@ public class AdminMain extends UserBase {
             for (CinemaNode c : cinemas) {
                 if (c.getID() == id) {
                     found = true;
-                    System.out.println(Colors.WHITE_BOLD + "\nCurrent Cinema Info:" + Colors.RESET);
-                    System.out.printf(Colors.WHITE + "ID: %d%n" + Colors.RESET, c.getID());
-                    System.out.printf(Colors.WHITE + "Cinema Name: %s%n" + Colors.RESET, c.getName());
-                    System.out.printf(Colors.WHITE + "Movie Title: %s%n" + Colors.RESET, c.getMovie());
-                    System.out.printf(Colors.WHITE + "Rows: %d%n" + Colors.RESET, c.getRows());
-                    System.out.printf(Colors.WHITE + "Seats per Row: %d%n" + Colors.RESET, c.getSeatsPerRow());
-                    System.out.printf(Colors.WHITE + "Pricing: %.2f%n" + Colors.RESET, c.getPrice());
+                    System.out.println();
+                        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+                        System.out.println(
+                                Colors.BG_RED + Colors.BLACK + "║" +
+                                Colors.BOLD + Colors.YELLOW + "        CURRENT CINEMA INFO       " +
+                                Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" +
+                                Colors.RESET
+                        );
+                        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+                    
+                    System.out.printf(Colors.WHITE_BOLD + "\nID: " + Colors.RESET + c.getID() + "\n");
+                    System.out.printf(Colors.WHITE_BOLD + "Cinema Name: " + Colors.RESET + c.getName() + "\n");
+                    System.out.printf(Colors.WHITE_BOLD + "Movie Title: " + Colors.RESET + c.getMovie() + "\n");
+                    System.out.printf(Colors.WHITE_BOLD + "Rows: " + Colors.RESET + c.getRows() + "\n");
+                    System.out.printf(Colors.WHITE_BOLD + "Seats per Row: " + Colors.RESET + c.getSeatsPerRow() + "\n");
+                    System.out.printf(Colors.WHITE_BOLD + "Pricing: " + Colors.RESET + c.getPrice() + "\n");
 
 
                     System.out.print(Colors.WHITE_BOLD + "\nEnter new Cinema Name: " + Colors.RESET);
@@ -216,7 +223,7 @@ public class AdminMain extends UserBase {
                             if (newRows <= 0) throw new NumberFormatException();
                             break;
                         } catch (NumberFormatException e) {
-                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                         }
                     }
 
@@ -234,7 +241,7 @@ public class AdminMain extends UserBase {
                             if (newSeatsPerRow <= 0) throw new NumberFormatException();
                             break;
                         } catch (NumberFormatException e) {
-                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                         }
                     }
 
@@ -251,7 +258,7 @@ public class AdminMain extends UserBase {
                             if (pricing <= 0) throw new NumberFormatException();
                             break;
                         } catch (NumberFormatException e) {
-                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                            System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                         }
                     }
 
@@ -282,7 +289,7 @@ public class AdminMain extends UserBase {
                     c.setSeatsPerRow(newSeatsPerRow);
                     c.setPrice(pricing);
 
-                    System.out.printf(Colors.GREEN + "\nCinema \"%s - %s\" updated successfully!" + Colors.RESET, c.getName(), c.getMovie());
+                    System.out.printf(Colors.GREEN + Colors.BOLD + "\nCinema \"%s - %s\" updated successfully!\n" + Colors.RESET, c.getName(), c.getMovie());
                     FrontEnd.Flow.pressEnter();
                     input.nextLine();
                     return;
@@ -309,13 +316,13 @@ public class AdminMain extends UserBase {
                 System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID to delete (0 to cancel): " + Colors.RESET);
                 id = Integer.parseInt(input.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                 continue;
             }
             if (id == 0) {
                 return;
             } else if (id < 0) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Please enter a valid positive number." + Colors.RESET);
                 continue;
             }
 
@@ -329,12 +336,12 @@ public class AdminMain extends UserBase {
 
             if (deleteMe != null) {
                 cinemas.deleteValue(deleteMe);
-                System.out.printf(Colors.GREEN + "\nCinema %d deleted successfully!%n\n" + Colors.RESET, id);
+                System.out.printf(Colors.GREEN + Colors.BOLD + "\nCinema %d deleted successfully!%n" + Colors.RESET, id);
                 System.out.println("Press " + Colors.GREEN + Colors.BOLD + "[Enter]" + Colors.RESET + "to return to menu.");
                 input.nextLine();
                 return;
             } else {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found.\n" + Colors.RESET);
+                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found." + Colors.RESET);
             }
         }
     }
