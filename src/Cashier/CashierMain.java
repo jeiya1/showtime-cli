@@ -427,4 +427,7 @@ public class CashierMain extends UserBase {
         }
         return false;
     }
+    public static LinkedListM<Receipt> getReceipts() {
+        return receipts;
+    }
 }

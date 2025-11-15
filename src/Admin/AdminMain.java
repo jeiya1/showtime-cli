@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 import DataStructures.CinemaNode;
 import DataStructures.LinkedListM;
+import DataStructures.Receipt;
+import Cashier.CashierMain;
 import User.UserBase;
 import Utils.Colors;
 
 public class AdminMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
     private static final Scanner input = new Scanner(System.in);
+    private static final LinkedListM<Receipt> receipts = CashierMain.getReceipts();
 
     public AdminMain() {
         setUserRole("Admin");
@@ -161,6 +164,8 @@ public class AdminMain extends UserBase {
 
         FrontEnd.Flow.updateCinema();
 
+
+
         while (true) {
             int id = 0;
             try {
@@ -194,11 +199,9 @@ public class AdminMain extends UserBase {
 
                     System.out.print(Colors.WHITE_BOLD + "\nEnter new Cinema Name: " + Colors.RESET);
                     String newName = input.nextLine();
-                    if (!newName.isEmpty()) c.setName(newName);
 
                     System.out.print(Colors.WHITE_BOLD + "Enter new Movie Title: " + Colors.RESET);
                     String newMovie = input.nextLine();
-                    if (!newMovie.isEmpty()) c.setMovie(newMovie);
 
                     int newRows;
                     while (true) {
@@ -235,9 +238,6 @@ public class AdminMain extends UserBase {
                         }
                     }
 
-                    c.setRows(newRows);
-                    c.setSeatsPerRow(newSeatsPerRow);
-
                     double pricing;
                     while (true) {
                         try {
@@ -255,6 +255,31 @@ public class AdminMain extends UserBase {
                         }
                     }
 
+                    boolean invalidBookingExists = false;
+                    for (Receipt r : CashierMain.getReceipts()) {   // <-- Add a getter for receipts
+                        if (r.getCinemaID() == c.getID()) {
+                            if (r.getRow() > newRows || r.getSeatNumber() > newSeatsPerRow) {
+                                invalidBookingExists = true;
+                                System.out.printf(
+                                        Colors.RED + Colors.ITALIC +
+                                                "\nERROR: Cannot resize cinema. Existing booking at Row %d Seat %d will become invalid. " +
+                                                Colors.RESET,
+                                        r.getRow(), r.getSeatNumber()
+                                );
+                            }
+                        }
+                    }
+
+                    if (invalidBookingExists) {
+                        System.out.println(Colors.RED + Colors.BOLD +
+                                "\nPlease cancel/refund invalid bookings before resizing this cinema.\n" + Colors.RESET);
+                        return;
+                    }
+
+                    if (!newName.isEmpty()) c.setName(newName);
+                    if (!newMovie.isEmpty()) c.setMovie(newMovie);
+                    c.setRows(newRows);
+                    c.setSeatsPerRow(newSeatsPerRow);
                     c.setPrice(pricing);
 
                     System.out.printf(Colors.GREEN + "\nCinema \"%s - %s\" updated successfully!" + Colors.RESET, c.getName(), c.getMovie());
