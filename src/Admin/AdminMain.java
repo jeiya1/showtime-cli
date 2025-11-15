@@ -2,15 +2,14 @@ package Admin;
 
 import java.util.Scanner;
 
-import DataStructures.CinemaNode;
-import DataStructures.LinkedListM;
-import DataStructures.Receipt;
+import Data.Database;
+import DataStructures.*;
 import Cashier.CashierMain;
 import User.UserBase;
 import Utils.Colors;
 
 public class AdminMain extends UserBase {
-    private static final LinkedListM<CinemaNode> cinemas = new LinkedListM<>();
+    private static final LinkedListM<CinemaNode> cinemas = Database.cinemas;
     private static final Scanner input = new Scanner(System.in);
 
     public AdminMain() {
@@ -164,7 +163,7 @@ public class AdminMain extends UserBase {
 
 
         while (true) {
-            int id = 0;
+            int id;
             try {
                 System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID to update (0 to cancel): " + Colors.RESET);
                 id = Integer.parseInt(input.nextLine().trim());
@@ -180,11 +179,9 @@ public class AdminMain extends UserBase {
                 continue;
             }
 
-            boolean found = false;
 
             for (CinemaNode c : cinemas) {
                 if (c.getID() == id) {
-                    found = true;
                     System.out.println();
                         System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
                         System.out.println(
@@ -262,7 +259,7 @@ public class AdminMain extends UserBase {
                     }
 
                     boolean invalidBookingExists = false;
-                    for (Receipt r : CashierMain.getReceipts()) {
+                    for (Receipt r : Database.receipts) {
                         if (r.getCinemaID() == c.getID()) {
                             if (r.getRow() > newRows || r.getSeatNumber() > newSeatsPerRow) {
                                 invalidBookingExists = true;
@@ -294,9 +291,7 @@ public class AdminMain extends UserBase {
                     return;
                 }
             }
-            if (!found) {
-                System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found." + Colors.RESET);
-            }
+            System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
         }
     }
 
@@ -310,7 +305,7 @@ public class AdminMain extends UserBase {
         FrontEnd.Flow.deleteCinema();
 
         while (true) {
-            int id = 0;
+            int id;
             try {
                 System.out.print(Colors.WHITE_BOLD + "\nEnter Cinema ID to delete (0 to cancel): " + Colors.RESET);
                 id = Integer.parseInt(input.nextLine().trim());
@@ -343,9 +338,5 @@ public class AdminMain extends UserBase {
                 System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema not found." + Colors.RESET);
             }
         }
-    }
-
-    public static LinkedListM<CinemaNode> getCinemas() {
-        return cinemas;
     }
 }

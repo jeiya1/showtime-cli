@@ -1,8 +1,9 @@
 package Cashier;
 
 import java.util.Scanner;
+
+import Data.Database;
 import DataStructures.*;
-import Admin.AdminMain;
 import User.UserBase;
 import Utils.Colors;
 
@@ -12,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 public class CashierMain extends UserBase {
     private static final Scanner input = new Scanner(System.in);
-    private static final LinkedListM<Receipt> receipts = new LinkedListM<>();
-    private static final LinkedListM<CinemaNode> cinemas = AdminMain.getCinemas();
+    private static final LinkedListM<CinemaNode> cinemas = Database.cinemas;
+    private static final LinkedListM<Receipt> receipts = Database.receipts;
     private static final CinemaNode CANCELLED = new CinemaNode(-1, null, null, 0, 0, 0);
     private static final StackM<Receipt> undoStack = new StackM<>();
     private static final StackM<Receipt> redoStack = new StackM<>();
@@ -85,18 +86,15 @@ public class CashierMain extends UserBase {
         }
         System.out.println();
 
-        // Ask the user for Cinema ID
-        while (true) {
-            CinemaNode cinema = getCinemaByID();
-            if (cinema == CANCELLED) return;
+        CinemaNode cinema = getCinemaByID();
+        if (cinema == CANCELLED) return;
 
-            if (cinema != null) {
-                printSeatGrid(cinema);
-                return;
-            } else {
-                System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Cinema not found." + Colors.RESET);
-                return;
-            }
+        if (cinema != null) {
+            printSeatGrid(cinema);
+            return;
+        } else {
+            System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Cinema not found." + Colors.RESET);
+            return;
         }
     }
 
