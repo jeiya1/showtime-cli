@@ -76,9 +76,15 @@ public class AdminMain extends UserBase {
                         break;
                     }
                 }
+                for (Receipt r : Database.receipts) {
+                    if (r.getCinemaID() == id) {
+                        exists = true;
+                        break;
+                    }
+                }
 
                 if (exists) {
-                    System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema already exists." + Colors.RESET);
+                    System.out.println(Colors.RED + Colors.ITALIC +"\nERROR: Cinema ID already taken." + Colors.RESET);
                     continue;
                 }
                 break;

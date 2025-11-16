@@ -16,8 +16,8 @@ public class CashierMain extends UserBase {
     private static final LinkedListM<CinemaNode> cinemas = Database.cinemas;
     private static final LinkedListM<Receipt> receipts = Database.receipts;
     private static final CinemaNode CANCELLED = new CinemaNode(-1, null, null, 0, 0, 0);
-    private static final StackM<Receipt> undoStack = new StackM<>();
-    private static final StackM<Receipt> redoStack = new StackM<>();
+//    private static final StackM<Receipt> undoStack = new StackM<>();
+//    private static final StackM<Receipt> redoStack = new StackM<>();
 
     public CashierMain() {
         setUserRole("Cashier");
@@ -215,8 +215,6 @@ public class CashierMain extends UserBase {
         System.out.println("\n--------------------------------------");
     }
 
-
-
     private String repeat(char c, int n) {
         return new String(new char[n]).replace('\0', c);
     }
@@ -236,44 +234,40 @@ public class CashierMain extends UserBase {
         final int WIDTH = 40;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String now = LocalDateTime.now().format(dtf);
+        String EQ = "========================================";
+        String DASH = "----------------------------------------";
+        System.out.println();
+        System.out.println(EQ);
+        System.out.println("                 SHOWTIME               ");
+        System.out.println("              OFFICIAL RECEIPT          ");
+        System.out.println(EQ);
 
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
+        System.out.printf("%-15s : %s%n", "Receipt ID", r.getReceiptID());
+        System.out.printf("%-15s : %s%n", "Date/Time", now);
 
-        System.out.println(Colors.WHITE + center("SHOWTIME", WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center("OFFICIAL RECEIPT", WIDTH) + Colors.RESET);
-
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
-
-        System.out.printf(Colors.WHITE + "%-20s %s%n" + Colors.RESET, "Receipt ID:", r.getReceiptID());
-        System.out.printf(Colors.WHITE + "%-20s %s%n" + Colors.RESET, "Date/Time:", now);
-
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
-
+        System.out.println(DASH);
         int cinemaID = r.getCinemaID();
+        System.out.printf("%-15s : %d%n", "Cinema",cinemaID);
+        System.out.printf("%-15s : %s%n", "Movie", trimTo(movie, 30));
+        System.out.printf("%-16s: Row %d, Seat %d%n", "Seat", r.getRow(), r.getSeatNumber());
 
-        System.out.printf(Colors.WHITE + "%-10s: %s%n" + Colors.RESET, "Cinema", cinemaID + " (" + trimTo(movie, 18) + ")");
-        System.out.printf(Colors.WHITE + "%-10s: Row %d, Seat %d%n" + Colors.RESET, "Seat", r.getRow(), r.getSeatNumber());
+        System.out.println(DASH);
 
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
+        String price = formatCurrency(r.getPrice());
+        System.out.printf("%-25s %13s%n", "Ticket x1", price);
 
-        String priceLabel = "Ticket x1";
-        String priceStr = formatCurrency(r.getPrice());
-        System.out.printf(Colors.WHITE + "%-30s %9s%n" + Colors.RESET, priceLabel, priceStr);
+        System.out.println(DASH);
 
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
-        System.out.printf(Colors.WHITE + "%-30s %9s%n" + Colors.RESET, "TOTAL:", formatCurrency(r.getPrice()));
+        System.out.printf("%-25s %13s%n", "TOTAL", price);
 
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
+        System.out.println(EQ);
 
-        String bars = "|" + "=".repeat(Math.max(0, Math.min(30, r.getReceiptID().length()))) + "|";
-        System.out.println(Colors.WHITE + center(bars, WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center(r.getReceiptID(), WIDTH) + Colors.RESET);
-
+        System.out.println("        |======================|       ");
+        System.out.println("                " + r.getReceiptID());
         System.out.println();
-        System.out.println(Colors.WHITE + center("Enjoy the movie!", WIDTH) + Colors.RESET);
+        System.out.println("            Enjoy the movie!          ");
         System.out.println();
-
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
+        System.out.println(EQ);
         System.out.println();
     }
 
@@ -296,14 +290,13 @@ public class CashierMain extends UserBase {
 
         System.out.println(DASH);
 
-        System.out.printf("%-15s : %d%n", "Cinema", cinema.getID());
-        System.out.printf("%-15s : %s%n", "Movie", trimTo(cinema.getMovie(), 30));
 
         String movieShown = (cinema != null && cinema.getMovie() != null) ? cinema.getMovie() : r.getMovieTitle();
         int cinemaIdShown = r.getCinemaID();
 
-        System.out.printf(Colors.WHITE + "%-10s: %s%n" + Colors.RESET, "Cinema", cinemaIdShown + " (" + trimTo(movieShown, 18) + ")");
-        System.out.printf(Colors.WHITE + "%-10s: Row %d, Seat %d%n" + Colors.RESET, "Seat", r.getRow(), r.getSeatNumber());
+        System.out.printf("%-15s : %d%n", "Cinema", cinemaIdShown);
+        System.out.printf("%-15s : %s%n", "Movie", trimTo(movieShown, 30));
+        System.out.printf("%-16s: Row %d, Seat %d%n", "Seat", r.getRow(), r.getSeatNumber());
 
         System.out.println(DASH);
 
