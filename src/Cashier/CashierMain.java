@@ -215,19 +215,8 @@ public class CashierMain extends UserBase {
         System.out.println("\n--------------------------------------");
     }
 
-    private String repeat(char c, int n) {
-        return new String(new char[n]).replace('\0', c);
-    }
-
-    private String center(String s, int width) {
-        if (s == null) s = "";
-        if (s.length() >= width) return s.substring(0, width);
-        int left = (width - s.length()) / 2;
-        return repeat(' ', left) + s + repeat(' ', width - left - s.length());
-    }
-
     private String formatCurrency(double amount) {
-        return String.format("%.2f", amount);
+        return "₱" + String.format("%.2f", amount);
     }
 
     private void printReceipt(Receipt r, CinemaNode cinema, String movie) {
