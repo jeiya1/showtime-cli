@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import Data.Database;
 import DataStructures.*;
-import Cashier.CashierMain;
 import User.UserBase;
 import Utils.Colors;
 
