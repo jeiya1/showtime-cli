@@ -93,7 +93,7 @@ public class CashierMain extends UserBase {
             printSeatGrid(cinema);
             return;
         } else {
-            System.out.println(Colors.RED + Colors.ITALIC + "ERROR: Cinema not found." + Colors.RESET);
+            System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Cinema not found." + Colors.RESET);
             return;
         }
     }
@@ -133,7 +133,7 @@ public class CashierMain extends UserBase {
                     Receipt r = new Receipt(receiptId, cinema.getID(), cinema.getMovie(), row, seatNum, price);
                     receipts.insert(r);
 
-                    System.out.printf(Colors.GREEN + Colors.BOLD + "\nReservation successful!\nReceipt ID: %s%n" + Colors.RESET, receiptId);
+                    System.out.printf(Colors.GREEN + Colors.BOLD + "\nReservation successful!\n" + Colors.RESET);
 
                     printReceipt(r, cinema);
                     return;
@@ -186,17 +186,14 @@ public class CashierMain extends UserBase {
     }
 
     private void printSeatGrid(CinemaNode cinema) {
+        System.out.println();
+        System.out.println(Colors.YELLOW + Colors.BOLD + "Cinema " + cinema.getID() + " : " + cinema.getMovie() + Colors.RESET);
+        System.out.println();
+
         int rows = cinema.getRows();
         int seatsPerRow = cinema.getSeatsPerRow();
 
-        System.out.println();
-        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
-        System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "         CINEMA SEAT LAYOUT       "
-                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
-        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
-        System.out.println();
-
-        System.out.print(Colors.WHITE_BOLD + "         ");
+        System.out.print(Colors.WHITE_BOLD + "         "); 
         for (int s = 1; s <= seatsPerRow; s++) {
             System.out.printf("%2d  ", s);
         }
@@ -206,11 +203,7 @@ public class CashierMain extends UserBase {
             System.out.print(Colors.WHITE_BOLD + String.format("Row %2d | ", r) + Colors.RESET);
             for (int s = 1; s <= seatsPerRow; s++) {
                 boolean booked = isSeatBooked(cinema.getID(), r, s);
-                if (booked) {
-                    System.out.print(Colors.RED + "[X] " + Colors.RESET);
-                } else {
-                    System.out.print(Colors.GREEN + "[ ] " + Colors.RESET);
-                }
+                System.out.print(booked ? Colors.RED + "[X] " + Colors.RESET : Colors.GREEN + "[ ] " + Colors.RESET);
             }
             System.out.println();
         }
@@ -218,7 +211,11 @@ public class CashierMain extends UserBase {
         System.out.println("\n" + Colors.WHITE_BOLD + "Legend: " + Colors.RESET
                 + Colors.GREEN + "[ ] Available " + Colors.RESET
                 + Colors.RED + "[X] Booked" + Colors.RESET);
+
+        System.out.println("\n--------------------------------------");
     }
+
+
 
     private String repeat(char c, int n) {
         return new String(new char[n]).replace('\0', c);
@@ -237,44 +234,45 @@ public class CashierMain extends UserBase {
 
     private void printReceipt(Receipt r, CinemaNode cinema) {
         final int WIDTH = 40;
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         String now = LocalDateTime.now().format(dtf);
 
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
-
-        System.out.println(Colors.WHITE + center("SHOWTIME", WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center("OFFICIAL RECEIPT", WIDTH) + Colors.RESET);
-
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
-
-        System.out.printf(Colors.WHITE + "%-20s %s%n" + Colors.RESET, "Receipt ID:", r.getReceiptID());
-        System.out.printf(Colors.WHITE + "%-20s %s%n" + Colors.RESET, "Date/Time:", now);
-
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
-
-        System.out.printf(Colors.WHITE + "%-10s: %s%n" + Colors.RESET, "Cinema", cinema.getID() + " (" + trimTo(cinema.getMovie(), 18) + ")");
-        System.out.printf(Colors.WHITE + "%-10s: Row %d, Seat %d%n" + Colors.RESET, "Seat", r.getRow(), r.getSeatNumber());
-
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
-
-        String priceLabel = "Ticket x1";
-        String priceStr = formatCurrency(r.getPrice());
-        System.out.printf(Colors.WHITE + "%-30s %9s%n" + Colors.RESET, priceLabel, priceStr);
-
-        System.out.println(Colors.WHITE + "-".repeat(WIDTH) + Colors.RESET);
-        System.out.printf(Colors.WHITE + "%-30s %9s%n" + Colors.RESET, "TOTAL:", formatCurrency(r.getPrice()));
-
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
-
-        String bars = "|" + "=".repeat(Math.max(0, Math.min(30, r.getReceiptID().length()))) + "|";
-        System.out.println(Colors.WHITE + center(bars, WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center(r.getReceiptID(), WIDTH) + Colors.RESET);
-
+        String EQ = "========================================";
+        String DASH = "----------------------------------------";
         System.out.println();
-        System.out.println(Colors.WHITE + center("Enjoy the movie!", WIDTH) + Colors.RESET);
-        System.out.println();
+        System.out.println(EQ);
+        System.out.println("                 SHOWTIME               ");
+        System.out.println("              OFFICIAL RECEIPT          ");
+        System.out.println(EQ);
 
-        System.out.println(Colors.WHITE + "=".repeat(WIDTH) + Colors.RESET);
+        System.out.printf("%-15s : %s%n", "Receipt ID", r.getReceiptID());
+        System.out.printf("%-15s : %s%n", "Date/Time", now);
+
+        System.out.println(DASH);
+
+        System.out.printf("%-15s : %d%n", "Cinema", cinema.getID());
+        System.out.printf("%-15s : %s%n", "Movie", trimTo(cinema.getMovie(), 30));
+
+        System.out.printf("%-15s : Row %d, Seat %d%n", "Seat", r.getRow(), r.getSeatNumber());
+
+        System.out.println(DASH);
+
+        String price = formatCurrency(r.getPrice());
+        System.out.printf("%-25s %13s%n", "Ticket x1", price);
+
+        System.out.println(DASH);
+
+        System.out.printf("%-25s %13s%n", "TOTAL", price);
+
+        System.out.println(EQ);
+
+        System.out.println("        |======================|       ");
+        System.out.println("                " + r.getReceiptID());
+        System.out.println();
+        System.out.println("            Enjoy the movie!          ");
+        System.out.println();
+        System.out.println(EQ);
         System.out.println();
     }
 
@@ -285,18 +283,21 @@ public class CashierMain extends UserBase {
             return;
         }
 
-        final int WIDTH = 40;
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String now = LocalDateTime.now().format(dtf);
-
         int totalTickets = 0;
         double totalRevenue = 0.0;
 
-        System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center("SALES SUMMARY", WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center(now, WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "║" +
+                Colors.BOLD + Colors.YELLOW + "           SALES SUMMARY          " +
+                Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println();
 
+        String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        System.out.println(Colors.WHITE + "           " + now + Colors.RESET);
+    
+        System.out.println(Colors.WHITE + "-------------------------------------" + Colors.RESET);
         System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Cinema (Movie)", "Revenue");
 
         for (CinemaNode cinema : cinemas) {
@@ -316,13 +317,16 @@ public class CashierMain extends UserBase {
             totalRevenue += rev;
         }
 
-        System.out.println(Colors.WHITE + repeat('-', WIDTH) + Colors.RESET);
+        System.out.println(Colors.WHITE + "-------------------------------------" + Colors.RESET);
         System.out.printf(Colors.WHITE + "%-25s %10d%n" + Colors.RESET, "Total Tickets:", totalTickets);
         System.out.printf(Colors.WHITE + "%-25s %10s%n" + Colors.RESET, "Total Revenue:", formatCurrency(totalRevenue));
-        System.out.println(Colors.WHITE + repeat('=', WIDTH) + Colors.RESET);
-        System.out.println(Colors.WHITE + center("End of Report", WIDTH) + Colors.RESET);
+
+        System.out.println(Colors.WHITE + "=====================================" + Colors.RESET);
+        System.out.println(Colors.WHITE + "             End of Report           " + Colors.RESET);
+        System.out.println(Colors.WHITE + "=====================================" + Colors.RESET);
         System.out.println();
     }
+
 
     private String trimTo(String s, int max) {
         if (s == null) return "";
@@ -330,17 +334,23 @@ public class CashierMain extends UserBase {
     }
 
     private void displayAllSeats() {
-        if (cinemas.count() == 0) {
-            FrontEnd.Flow.viewCinemasNone();
-            input.nextLine();
-            return;
-        }
-        System.out.println(Colors.WHITE_BOLD + "\n=== ALL CINEMA SEAT LAYOUTS ===" + Colors.RESET);
-        for (CinemaNode cinema : cinemas) {
-            printSeatGrid(cinema);
-            System.out.println("--------------------------------------");
-        }
+    if (cinemas.count() == 0) {
+        FrontEnd.Flow.viewCinemasNone();
+        input.nextLine();
+        return;
     }
+
+    System.out.println();
+    System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+    System.out.println(Colors.BG_RED + Colors.BLACK + "║" + Colors.BOLD + Colors.YELLOW + "      ALL CINEMA SEAT LAYOUTS     " + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" + Colors.RESET);
+    System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
+    for (CinemaNode cinema : cinemas) {
+        printSeatGrid(cinema);
+        System.out.println("--------------------------------------");
+    }
+}
+
 
     private void showAllReceipts() {
         if (receipts.count() == 0) {
@@ -348,7 +358,16 @@ public class CashierMain extends UserBase {
             input.nextLine();
             return;
         }
-        System.out.println(Colors.WHITE_BOLD + "\n=== ALL RECEIPTS ===" + Colors.RESET);
+        System.out.println();
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+        System.out.println(
+                Colors.BG_RED + Colors.BLACK + "║" 
+                + Colors.BOLD + Colors.YELLOW + "           ALL RECEIPTS           "
+                + Colors.RESET + Colors.BG_RED + Colors.BLACK + "║" 
+                + Colors.RESET
+        );
+        System.out.println(Colors.BG_RED + Colors.BLACK + "o═══════o════════o════════o════════o" + Colors.RESET);
+
         for (Receipt r : receipts) {
             CinemaNode cinema = getCinemaByID(r.getCinemaID());
             if (cinema != null) printReceipt(r, cinema);
