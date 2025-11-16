@@ -1,5 +1,4 @@
-import User.UserBase;
-import User.UserFactory;
+import User.*;
 import Utils.Colors;
 
 import java.util.Scanner;
@@ -24,7 +23,7 @@ public class Main {
                     break;
                 }
 
-                UserBase user = UserFactory.createUser(choice);
+                UserActions user = UserFactory.createUser(choice);
 
                 if (user != null) {
                     user.run();

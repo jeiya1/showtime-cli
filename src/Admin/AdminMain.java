@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 import Data.Database;
 import DataStructures.*;
-import User.UserBase;
+import User.*;
 import Utils.Colors;
 
-public class AdminMain extends UserBase {
+public class AdminMain extends UserBase implements CinemaCRUD {
     private static final LinkedListM<CinemaNode> cinemas = Database.cinemas;
     private static final Scanner input = new Scanner(System.in);
 
@@ -51,8 +51,7 @@ public class AdminMain extends UserBase {
         }
     }
 
-
-    private void addCinema() {
+    public void addCinema() {
         FrontEnd.Flow.addCinema();
         int id, rows, seatsPerRow;
         double price;
@@ -137,7 +136,7 @@ public class AdminMain extends UserBase {
         input.nextLine();
     }
 
-    private void viewCinemas() {
+    public void viewCinemas() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
@@ -156,7 +155,7 @@ public class AdminMain extends UserBase {
         input.nextLine();
     }
 
-    private void updateCinema() {
+    public void updateCinema() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();
@@ -300,7 +299,7 @@ public class AdminMain extends UserBase {
         }
     }
 
-    private static void deleteCinema() {
+    public void deleteCinema() {
         if  (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
             input.nextLine();

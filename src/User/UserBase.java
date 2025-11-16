@@ -2,7 +2,7 @@ package User;
 
 import Utils.Colors;
 
-public abstract class UserBase {
+public abstract class UserBase implements UserActions {
     protected String userRole;
 
     public abstract void displayMenu();
