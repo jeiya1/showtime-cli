@@ -136,6 +136,10 @@ public class AdminMain extends UserBase implements CinemaCRUD {
         input.nextLine();
     }
 
+    private String formatCurrency(double amount) {
+        return "₱" + String.format("%.2f", amount);
+    }
+
     public void viewCinemas() {
         if (cinemas.count() == 0) {
             FrontEnd.Flow.viewCinemasNone();
@@ -146,14 +150,15 @@ public class AdminMain extends UserBase implements CinemaCRUD {
         StringBuilder records = new StringBuilder();
 
         for (CinemaNode c : cinemas) {
-            records.append(String.format(" %d  │ %-10s │ %4d │ %7d │ %10.2f %n",
+            records.append(String.format(" %d  │ %-10s │ %4d │ %7d │ %10s %n",
                     c.getID(), c.getName(),
-                    c.getRows(), c.getSeatsPerRow(), c.getPrice()));
+                    c.getRows(), c.getSeatsPerRow(), formatCurrency(c.getPrice())));
         }
 
         FrontEnd.Flow.viewCinemasRecords(records.toString());
         input.nextLine();
     }
+
 
     public void updateCinema() {
         if (cinemas.count() == 0) {
