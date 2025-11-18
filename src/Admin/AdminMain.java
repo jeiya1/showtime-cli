@@ -92,8 +92,13 @@ public class AdminMain extends UserBase implements CinemaCRUD {
             }
         }
 
-        System.out.print(Colors.WHITE_BOLD + "Enter Movie Title: " + Colors.RESET);
-        movie = input.nextLine().trim();
+        do {
+            System.out.print(Colors.WHITE_BOLD + "Enter Movie Title: " + Colors.RESET);
+            movie = input.nextLine().trim();
+            if (movie.isEmpty()) {
+                System.out.println(Colors.RED + Colors.ITALIC + "\nERROR: Please enter a valid movie title." + Colors.RESET);
+            }
+        } while (movie.isEmpty());
 
         while (true) {
             try {
